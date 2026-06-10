@@ -7,6 +7,7 @@ import { AuthProvider, AuthContext } from './context/AuthContext';
 import Dashboard from './components/Dashboard';
 import Assets from './components/Assets';
 import Requests from './components/Requests';
+import RequestDetail from './components/RequestDetail';
 import CreateAsset from './components/CreateAsset';
 import CreateRequest from './components/CreateRequest';
 import Login from './components/Login';
@@ -37,7 +38,7 @@ function AppContent() {
     <div className="app-container">
       <nav className="sidebar">
         <div className="sidebar-header">
-          <h2>MMS - Manager</h2>
+          <h2>MaintenanceHub</h2>
         </div>
         <ul className="nav-links">
           <li><Link to="/"><Activity className="icon" /> Dashboard</Link></li>
@@ -67,6 +68,7 @@ function AppContent() {
             <Route path="/assets/new" element={<ProtectedRoute><CreateAsset /></ProtectedRoute>} />
             <Route path="/requests" element={<ProtectedRoute><Requests /></ProtectedRoute>} />
             <Route path="/requests/new" element={<ProtectedRoute><CreateRequest /></ProtectedRoute>} />
+            <Route path="/requests/:id" element={<ProtectedRoute><RequestDetail /></ProtectedRoute>} />
             <Route path="/inventory" element={<ProtectedRoute><Inventory /></ProtectedRoute>} />
             <Route path="/users" element={<ProtectedRoute>{user.role_id === 1 ? <UserManagement /> : <Navigate to="/" />}</ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/" />} />
