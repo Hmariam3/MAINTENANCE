@@ -1,4 +1,4 @@
-const { authenticate } = require('ldap-authentication');
+const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const prisma = require('../db');
 
@@ -14,8 +14,6 @@ exports.login = async (req, res) => {
     if (username === 'Admin' && password === '123456') {
       let adminUser = await prisma.users.findUnique({ where: { username: 'Admin' } });
       if (!adminUser) {
-        // Provide a default object if Admin doesn't exist in the DB yet,
-        // though the user mentioned they created one.
         adminUser = { user_id: 0, username: 'Admin', role_id: 1, full_name: 'System Admin' };
       }
       const token = jwt.sign(
@@ -26,50 +24,69 @@ exports.login = async (req, res) => {
       return res.json({ message: 'Admin login successful', token, user: adminUser });
     }
 
-    // 2. Check if the user exists in the local database
-    // The user mentioned they can login with email or username, so we check both
+    // 2. Authenticate with External AD API
+    const baseUrlLdap = process.env.EXTERNAL_AD_URL || process.env.LDAP_URL; 
+    let adRes;
+    try {
+      adRes = await axios.post(
+        `${baseUrlLdap}`,
+        { username, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": process.env.EXTERNAL_AD_API_KEY,
+          },
+          timeout: 10000,
+        }
+      );
+    } catch (err) {
+      console.error('External AD API Error:', err.message);
+      return res.status(401).json({ error: 'Invalid AD credentials or AD server unreachable' });
+    }
+
+    const adData = adRes.data;
+    
+    // Check if authenticated
+    if (!adData.IsAuthenticated) {
+      return res.status(401).json({ error: adData.ErrorMessage || 'Invalid AD credentials' });
+    }
+
+    // 3. Check if the user exists in the local database
     let localUser = await prisma.users.findFirst({
       where: {
         OR: [
-          { username: username },
-          { email: username }
+          { username: adData.UserName || username },
+          { email: adData.MailAdress || username }
         ]
       }
     });
 
-    if (!localUser || !localUser.is_active) {
-      return res.status(401).json({ error: 'User not found or inactive in the local system. Contact Admin.' });
+    // 4. If user doesn't exist, prompt for profile setup
+    if (!localUser) {
+      const branches = await prisma.branches.findMany({ where: { is_active: true } });
+      const tempToken = jwt.sign(
+        { is_temp: true, username: adData.UserName || username },
+        process.env.JWT_SECRET,
+        { expiresIn: '15m' }
+      );
+      
+      return res.json({
+        requires_profile: true,
+        adUser: {
+          username: adData.UserName || username,
+          email: adData.MailAdress || '',
+          full_name: adData.FullName || username
+        },
+        branches: branches,
+        tempToken: tempToken
+      });
     }
 
-    // 3. Authenticate with LDAP
-    // If username is an email, extract the sAMAccountName part if necessary, 
-    // but often we can just pass what they typed and let AD figure it out if we use direct bind.
-    // However, since we have a service user, we will search for their DN first.
-    let searchFilter = `(|(sAMAccountName=${username})(mail=${username})(userPrincipalName=${username}))`;
-    
-    let options = {
-      ldapOpts: {
-        url: process.env.LDAP_URL,
-      },
-      adminDn: process.env.LDAP_SERVICE_USER,
-      adminPassword: process.env.LDAP_SERVICE_PASSWORD,
-      userPassword: password,
-      userSearchBase: process.env.LDAP_BASE,
-      usernameAttribute: 'sAMAccountName', // fallback
-      username: username,
-      // If the library supports custom filter:
-      // userSearchFilter: searchFilter
-    };
-
-    let ldapUser;
-    try {
-      ldapUser = await authenticate(options);
-    } catch (ldapErr) {
-      console.error('LDAP Auth Error:', ldapErr);
-      return res.status(401).json({ error: 'Invalid LDAP credentials' });
+    if (!localUser.is_active) {
+      return res.status(401).json({ error: 'User account is inactive. Contact Admin.' });
     }
 
-    // 4. Generate JWT
+    // 5. Generate JWT and Login
     const token = jwt.sign(
       { user_id: localUser.user_id, username: localUser.username, role_id: localUser.role_id },
       process.env.JWT_SECRET,

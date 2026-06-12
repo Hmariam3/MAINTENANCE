@@ -116,3 +116,25 @@ exports.searchAdUser = async (req, res) => {
     res.status(500).json({ error: 'Failed to search Active Directory' });
   }
 };
+
+exports.updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role_id, branch_id, phone_number, is_active } = req.body;
+
+    const updatedUser = await prisma.users.update({
+      where: { user_id: parseInt(id, 10) },
+      data: {
+        role_id: role_id ? parseInt(role_id, 10) : undefined,
+        branch_id: branch_id ? parseInt(branch_id, 10) : undefined,
+        phone_number: phone_number !== undefined ? phone_number : undefined,
+        is_active: is_active !== undefined ? is_active : undefined
+      }
+    });
+
+    res.json({ message: 'User updated successfully', user: updatedUser });
+  } catch (err) {
+    console.error('Failed to update user:', err);
+    res.status(500).json({ error: 'Failed to update user' });
+  }
+};

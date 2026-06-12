@@ -6,7 +6,7 @@ exports.getLookups = async (req, res) => {
     const [
       categories, branches, priorities, users,
       assets, subProcessess, technicians,
-      holdReasons, partyTypes
+      holdReasons, partyTypes, roles
     ] = await Promise.all([
       prisma.asset_categories.findMany({ where: { is_active: true } }),
       prisma.branches.findMany({ where: { is_active: true } }),
@@ -32,6 +32,8 @@ exports.getLookups = async (req, res) => {
       prisma.on_hold_reasons.findMany({ orderBy: { reason_id: 'asc' } }),
       // Responsible party types
       prisma.responsible_party_types.findMany({ orderBy: { party_type_id: 'asc' } }),
+      // Roles
+      prisma.roles.findMany({ orderBy: { role_id: 'asc' } }),
     ]);
 
     const formattedSubProcessess = subProcessess.map(sp => ({
@@ -49,6 +51,7 @@ exports.getLookups = async (req, res) => {
       technicians,
       hold_reasons: holdReasons,
       party_types:  partyTypes,
+      roles:        roles,
     });
   } catch (err) {
     console.error(err);

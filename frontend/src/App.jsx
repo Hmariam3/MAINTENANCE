@@ -13,6 +13,8 @@ import CreateRequest from './components/CreateRequest';
 import Login from './components/Login';
 import UserManagement from './components/UserManagement';
 
+import SetProfile from './components/SetProfile';
+
 const Inventory = () => <div className="p-6"><h1>Inventory</h1><p>Spare parts and stock levels.</p></div>;
 
 const ProtectedRoute = ({ children }) => {
@@ -29,6 +31,7 @@ function AppContent() {
     return (
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/set-profile" element={<SetProfile />} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     );

@@ -21,6 +21,17 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const response = await api.post('/login', { username, password });
+      
+      if (response.data.requires_profile) {
+        return { 
+          success: false, 
+          requires_profile: true, 
+          adUser: response.data.adUser,
+          branches: response.data.branches,
+          tempToken: response.data.tempToken
+        };
+      }
+
       const { token, user: loggedInUser } = response.data;
 
       // Save to local storage

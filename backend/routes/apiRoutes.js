@@ -85,5 +85,6 @@ router.patch(
 router.get('/users/ad-search', userController.searchAdUser);
 router.get('/users',  userController.getUsers);
 router.post('/users', userController.createUser);
+router.patch('/users/:id', userController.updateUser);
 
 module.exports = router;
