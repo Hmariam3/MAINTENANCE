@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 const apiRoutes = require('./routes/apiRoutes');
+const pmRoutes = require('./routes/pmRoutes');
 
 // Basic health check endpoint
 app.get('/api/health', async (req, res) => {
@@ -24,6 +25,7 @@ app.get('/api/health', async (req, res) => {
 
 // Use API routes
 app.use('/api', apiRoutes);
+app.use('/api/pm', pmRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

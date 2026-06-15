@@ -7,9 +7,9 @@ import { AuthContext } from '../context/AuthContext';
 // Category → detail type mapping (mirrors backend constants)
 const CATEGORY_DETAIL_TYPE = { 1: 'hardware', 2: 'generator', 3: 'electrical', 4: 'electrical' };
 
-const HARDWARE_TYPES  = ['Laptop', 'Desktop', 'Printer', 'Router', 'Switch', 'Server', 'Monitor', 'UPS', 'Other'];
+const HARDWARE_TYPES = ['Laptop', 'Desktop', 'Printer', 'Router', 'Switch', 'Server', 'Monitor', 'UPS', 'Other'];
 const ELECTRICAL_TYPES = ['AC Unit', 'UPS System', 'Electrical Panel', 'Switchgear', 'Transformer', 'Cable/Wiring', 'Light Fixture', 'Other'];
-const GENERATOR_CATS  = ['Diesel Generator', 'Petrol Generator', 'Gas Generator', 'Standby Generator', 'Portable Generator', 'Other'];
+const GENERATOR_CATS = ['Diesel Generator', 'Petrol Generator', 'Gas Generator', 'Standby Generator', 'Portable Generator', 'Other'];
 
 const inputStyle = {
   width: '100%', padding: '0.75rem', borderRadius: '6px',
@@ -23,20 +23,20 @@ const labelStyle = {
 const fieldStyle = { display: 'flex', flexDirection: 'column', gap: '0.25rem' };
 
 const CreateRequest = () => {
-  const navigate  = useNavigate();
-  const { user }  = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [lookups, setLookups] = useState({
     categories: [], branches: [], priorities: [], users: [], assets: [], sub_processess: []
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     requester_user_id: user?.user_id || '',
-    branch_id:         user?.branch_id || '',
-    district:          '',
-    due_date:          '',
-    category_id:       '',
-    asset_id:          '',
-    priority_id:       '',
+    branch_id: user?.branch_id || '',
+    district: '',
+    due_date: '',
+    category_id: '',
+    asset_id: '',
+    priority_id: '',
     problem_description: '',
   });
 
@@ -96,16 +96,16 @@ const CreateRequest = () => {
         // Pre-fill type details from asset
         setTypeDetails(prev => ({
           ...prev,
-          brand:         asset.brand         || '',
-          model:         asset.model         || '',
+          brand: asset.brand || '',
+          model: asset.model || '',
           serial_number: asset.serial_number || '',
-          tag_number:    asset.tag_number    || '',
-          ip_address:    asset.ip_address    || '',
+          tag_number: asset.tag_number || '',
+          ip_address: asset.ip_address || '',
         }));
       }
     } else if (name === 'asset_id' && !value) {
       next.category_id = '';
-      next.district    = '';
+      next.district = '';
       setTypeDetails(prev => ({
         ...prev, brand: '', model: '', serial_number: '', tag_number: '', ip_address: ''
       }));
@@ -239,10 +239,10 @@ const CreateRequest = () => {
                 <label style={labelStyle}>Quantity</label>
                 <input type="number" min="1" name="quantity" value={typeDetails.quantity} onChange={handleTypeDetailChange} style={inputStyle} />
               </div>
-              <div style={{ ...fieldStyle, gridColumn: '1 / -1' }}>
+              {/* <div style={{ ...fieldStyle, gridColumn: '1 / -1' }}>
                 <label style={labelStyle}>IP Address</label>
                 <input name="ip_address" value={typeDetails.ip_address} onChange={handleTypeDetailChange} style={inputStyle} placeholder="e.g. 192.168.1.100" />
-              </div>
+              </div> */}
             </div>
           </DetailSection>
         )}
@@ -321,9 +321,9 @@ const CreateRequest = () => {
 
         {/* Hidden fields */}
         <input type="hidden" name="requester_user_id" value={formData.requester_user_id} />
-        <input type="hidden" name="branch_id"         value={formData.branch_id} />
-        <input type="hidden" name="district"          value={formData.district} />
-        <input type="hidden" name="category_id"       value={formData.category_id} />
+        <input type="hidden" name="branch_id" value={formData.branch_id} />
+        <input type="hidden" name="district" value={formData.district} />
+        <input type="hidden" name="category_id" value={formData.category_id} />
 
         {/* Submit */}
         <div style={{ display: 'flex', gap: '1rem', paddingTop: '0.5rem' }}>

@@ -12,6 +12,8 @@ import CreateAsset from './components/CreateAsset';
 import CreateRequest from './components/CreateRequest';
 import Login from './components/Login';
 import UserManagement from './components/UserManagement';
+import PMSchedules from './components/PMSchedules';
+import PMApprovals from './components/PMApprovals';
 
 import SetProfile from './components/SetProfile';
 
@@ -47,8 +49,14 @@ function AppContent() {
           <li><Link to="/"><Activity className="icon" /> Dashboard</Link></li>
           <li><Link to="/assets"><Package className="icon" /> Assets</Link></li>
           <li><Link to="/requests"><Wrench className="icon" /> Requests</Link></li>
-          <li><Link to="/inventory"><Settings className="icon" /> Inventory</Link></li>
-          {user.role_id === 1 && (
+          {/* <li><Link to="/inventory"><Settings className="icon" /> Inventory</Link></li> */}
+          {user.role_id === 4 && (
+            <li><Link to="/pm-schedules"><Wrench className="icon" /> PM Schedules</Link></li>
+          )}
+          {[2, 5, 8].includes(user.role_id) && (
+            <li><Link to="/pm-approvals"><Wrench className="icon" /> PM Approvals</Link></li>
+          )}
+          {[2, 5, 8].includes(user.role_id) && (
             <li><Link to="/users"><Users className="icon" /> Users</Link></li>
           )}
         </ul>
@@ -72,8 +80,10 @@ function AppContent() {
             <Route path="/requests" element={<ProtectedRoute><Requests /></ProtectedRoute>} />
             <Route path="/requests/new" element={<ProtectedRoute><CreateRequest /></ProtectedRoute>} />
             <Route path="/requests/:id" element={<ProtectedRoute><RequestDetail /></ProtectedRoute>} />
-            <Route path="/inventory" element={<ProtectedRoute><Inventory /></ProtectedRoute>} />
-            <Route path="/users" element={<ProtectedRoute>{user.role_id === 1 ? <UserManagement /> : <Navigate to="/" />}</ProtectedRoute>} />
+            {/* <Route path="/inventory" element={<ProtectedRoute><Inventory /></ProtectedRoute>} /> */}
+            <Route path="/pm-schedules" element={<ProtectedRoute>{user.role_id === 4 ? <PMSchedules /> : <Navigate to="/" />}</ProtectedRoute>} />
+            <Route path="/pm-approvals" element={<ProtectedRoute>{[2, 5, 8].includes(user.role_id) ? <PMApprovals /> : <Navigate to="/" />}</ProtectedRoute>} />
+            <Route path="/users" element={<ProtectedRoute>{[2, 5, 8].includes(user.role_id) ? <UserManagement /> : <Navigate to="/" />}</ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>

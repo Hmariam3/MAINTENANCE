@@ -75,35 +75,52 @@ const SetProfile = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)',
-      fontFamily: "'Inter', sans-serif"
+      backgroundColor: 'var(--bg-color)',
+      fontFamily: "'Inter', sans-serif",
+      position: 'relative',
+      overflow: 'hidden'
     }}>
+      {/* Decorative background elements */}
       <div style={{
-        background: '#fff',
+        position: 'absolute', top: '-10%', left: '-5%', width: '40vw', height: '40vw',
+        background: 'radial-gradient(circle, var(--primary) 0%, transparent 60%)',
+        opacity: 0.1, filter: 'blur(60px)', pointerEvents: 'none'
+      }}></div>
+      <div style={{
+        position: 'absolute', bottom: '-10%', right: '-5%', width: '40vw', height: '40vw',
+        background: 'radial-gradient(circle, var(--secondary) 0%, transparent 60%)',
+        opacity: 0.1, filter: 'blur(60px)', pointerEvents: 'none'
+      }}></div>
+
+      <div style={{
+        backgroundColor: 'var(--surface)',
         borderRadius: '16px',
         padding: '3rem 2.5rem',
         width: '100%',
         maxWidth: '500px',
-        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        border: '1px solid var(--border)',
+        zIndex: 1
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ margin: 0, fontSize: '1.875rem', fontWeight: 800, color: '#1f2937' }}>Complete Profile</h2>
-          <p style={{ marginTop: '0.5rem', color: '#6b7280', fontSize: '0.875rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <h2 style={{ margin: 0, fontSize: '1.875rem', fontWeight: 800, color: 'var(--text-main)' }}>Complete Profile</h2>
+          <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
             Welcome, <strong>{adUser.full_name}</strong>. Please complete your profile to continue.
           </p>
         </div>
 
         {error && (
           <div style={{
-            background: '#fee2e2',
-            color: '#b91c1c',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            border: '1px solid rgba(239, 68, 68, 0.2)',
+            color: 'var(--danger)',
             padding: '0.75rem 1rem',
             borderRadius: '8px',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
             marginBottom: '1.5rem',
-            fontSize: '0.875rem'
+            fontSize: '0.85rem'
           }}>
             <AlertCircle size={18} />
             <span>{error}</span>
@@ -114,25 +131,25 @@ const SetProfile = () => {
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500, color: '#374151' }}>Username</label>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Username</label>
               <div style={{ position: 'relative' }}>
-                <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><User size={16} color="#9ca3af" /></div>
-                <input disabled type="text" value={adUser.username} style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: '#f3f4f6', border: '1px solid #d1d5db', borderRadius: '8px', color: '#6b7280', boxSizing: 'border-box' }} />
+                <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><User size={16} color="var(--text-muted)" /></div>
+                <input disabled type="text" value={adUser.username} style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', backgroundColor: 'var(--surface-light)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text-muted)', boxSizing: 'border-box' }} />
               </div>
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500, color: '#374151' }}>Email</label>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Email</label>
               <div style={{ position: 'relative' }}>
-                <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><Mail size={16} color="#9ca3af" /></div>
-                <input disabled type="text" value={adUser.email} style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: '#f3f4f6', border: '1px solid #d1d5db', borderRadius: '8px', color: '#6b7280', boxSizing: 'border-box' }} />
+                <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><Mail size={16} color="var(--text-muted)" /></div>
+                <input disabled type="text" value={adUser.email} style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', backgroundColor: 'var(--surface-light)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text-muted)', boxSizing: 'border-box' }} />
               </div>
             </div>
           </div>
 
           <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500, color: '#374151' }}>Branch *</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Branch *</label>
             <div style={{ position: 'relative' }}>
-              <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><Building size={16} color="#9ca3af" /></div>
+              <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><Building size={16} color="var(--text-muted)" /></div>
               <input 
                 type="text" 
                 required 
@@ -140,7 +157,9 @@ const SetProfile = () => {
                 value={branchName} 
                 onChange={(e) => setBranchName(e.target.value)} 
                 placeholder="Type to search your branch..."
-                style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', border: '1px solid #d1d5db', borderRadius: '8px', boxSizing: 'border-box', background: '#fff' }} 
+                style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }} 
+                onFocus={(e) => e.target.style.borderColor = 'var(--primary)'}
+                onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
               />
               <datalist id="branch-list">
                 {branches.map(b => (
@@ -151,10 +170,12 @@ const SetProfile = () => {
           </div>
 
           <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500, color: '#374151' }}>Phone Number *</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Phone Number *</label>
             <div style={{ position: 'relative' }}>
-              <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><Phone size={16} color="#9ca3af" /></div>
-              <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+251 911 234 567" style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', border: '1px solid #d1d5db', borderRadius: '8px', boxSizing: 'border-box' }} />
+              <div style={{ position: 'absolute', inset: '0', left: 0, paddingLeft: '1rem', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}><Phone size={16} color="var(--text-muted)" /></div>
+              <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+251 911 234 567" style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }} 
+                onFocus={(e) => e.target.style.borderColor = 'var(--primary)'}
+                onBlur={(e) => e.target.style.borderColor = 'var(--border)'} />
             </div>
           </div>
 
@@ -163,21 +184,24 @@ const SetProfile = () => {
             disabled={isSubmitting}
             style={{
               width: '100%',
-              padding: '0.875rem',
+              padding: '0.85rem',
               marginTop: '1rem',
               border: 'none',
               borderRadius: '8px',
-              background: '#4F46E5',
+              backgroundColor: 'var(--primary)',
               color: 'white',
-              fontSize: '1rem',
+              fontSize: '0.95rem',
               fontWeight: 600,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '0.5rem',
-              transition: 'background-color 0.2s'
+              transition: 'background-color 0.2s',
+              opacity: isSubmitting ? 0.7 : 1
             }}
+            onMouseEnter={(e) => { if(!isSubmitting) e.target.style.backgroundColor = 'var(--primary-dark)'; }}
+            onMouseLeave={(e) => { if(!isSubmitting) e.target.style.backgroundColor = 'var(--primary)'; }}
           >
             <Save size={18} /> {isSubmitting ? 'Saving Profile...' : 'Save and Continue'}
           </button>

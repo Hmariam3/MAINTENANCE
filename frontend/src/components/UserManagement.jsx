@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
-import { Users, Save, X, Edit } from 'lucide-react';
-import '../index.css';
+import { Users, Save, X, Edit, Search } from 'lucide-react';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [lookups, setLookups] = useState({ roles: [], branches: [] });
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   
   // Modal states
   const [showModal, setShowModal] = useState(false);
@@ -85,123 +85,205 @@ const UserManagement = () => {
     }
   };
 
-  if (loading) return <div className="p-6">Loading users...</div>;
+  const filteredUsers = users.filter(u => 
+    u.full_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    u.username?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    u.email?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="p-6">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h1 style={{ margin: 0, fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#1f2937' }}>
-          <Users color="#4F46E5" /> User Management
-        </h1>
+    <div style={{ padding: '0' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
+        <div>
+          <h1 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--primary)', borderRadius: '8px', color: '#fff', display: 'flex' }}>
+              <Users size={24} />
+            </div>
+            User Management
+          </h1>
+          <p style={{ margin: '0.25rem 0 0', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+            Manage user roles, branch assignments, and account access.
+          </p>
+        </div>
       </div>
 
-      <div style={{ background: '#fff', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', color: '#1f2937' }}>
-          <thead>
-            <tr style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb' }}>
-              <th style={{ padding: '0.75rem 1rem', fontWeight: 600, color: '#374151' }}>Full Name</th>
-              <th style={{ padding: '0.75rem 1rem', fontWeight: 600, color: '#374151' }}>Username (AD)</th>
-              <th style={{ padding: '0.75rem 1rem', fontWeight: 600, color: '#374151' }}>Email</th>
-              <th style={{ padding: '0.75rem 1rem', fontWeight: 600, color: '#374151' }}>Role</th>
-              <th style={{ padding: '0.75rem 1rem', fontWeight: 600, color: '#374151' }}>Status</th>
-              <th style={{ padding: '0.75rem 1rem', fontWeight: 600, color: '#374151' }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map(u => (
-              <tr key={u.user_id} style={{ borderBottom: '1px solid #e5e7eb' }}>
-                <td style={{ padding: '0.75rem 1rem' }}>{u.full_name}</td>
-                <td style={{ padding: '0.75rem 1rem' }}>{u.username}</td>
-                <td style={{ padding: '0.75rem 1rem' }}>{u.email}</td>
-                <td style={{ padding: '0.75rem 1rem' }}>{u.roles?.role_name || u.role_id}</td>
-                <td style={{ padding: '0.75rem 1rem' }}>
-                  <span style={{ background: u.is_active ? '#dcfce7' : '#fee2e2', color: u.is_active ? '#166534' : '#991b1b', padding: '0.25rem 0.5rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600 }}>
-                    {u.is_active ? 'Active' : 'Inactive'}
-                  </span>
-                </td>
-                <td style={{ padding: '0.75rem 1rem' }}>
-                  <button onClick={() => openEditModal(u)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4F46E5', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                    <Edit size={16} /> Edit
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {users.length === 0 && (
-              <tr>
-                <td colSpan="6" style={{ padding: '1.5rem', textAlign: 'center', color: '#6b7280' }}>No users found.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', position: 'relative', maxWidth: '400px' }}>
+        <div style={{ position: 'absolute', left: '1rem', color: 'var(--text-muted)' }}>
+          <Search size={18} />
+        </div>
+        <input 
+          type="text" 
+          placeholder="Search users..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ 
+            width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', 
+            backgroundColor: 'var(--surface)', border: '1px solid var(--border)', 
+            borderRadius: '8px', color: 'var(--text-main)', outline: 'none' 
+          }}
+          onFocus={e => e.target.style.borderColor = 'var(--primary)'}
+          onBlur={e => e.target.style.borderColor = 'var(--border)'}
+        />
       </div>
 
+      {loading ? (
+        <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>Loading users...</div>
+      ) : (
+        <div style={{ backgroundColor: 'var(--surface)', borderRadius: '12px', border: '1px solid var(--border)', overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <thead>
+                <tr style={{ backgroundColor: 'var(--surface-light)', color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <th style={{ padding: '1rem 1.5rem', fontWeight: '600' }}>Full Name</th>
+                  <th style={{ padding: '1rem 1.5rem', fontWeight: '600' }}>Username / Email</th>
+                  <th style={{ padding: '1rem 1.5rem', fontWeight: '600' }}>Role</th>
+                  <th style={{ padding: '1rem 1.5rem', fontWeight: '600' }}>Status</th>
+                  <th style={{ padding: '1rem 1.5rem', fontWeight: '600', textAlign: 'right' }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers.map(u => (
+                  <tr key={u.user_id} style={{ borderBottom: '1px solid var(--border)', transition: 'background-color 0.2s' }}
+                      onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--surface-light)'}
+                      onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                  >
+                    <td style={{ padding: '1rem 1.5rem', fontWeight: '500', color: 'var(--text-main)' }}>{u.full_name}</td>
+                    <td style={{ padding: '1rem 1.5rem' }}>
+                      <div style={{ fontWeight: '500', color: 'var(--primary)' }}>{u.username}</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{u.email}</div>
+                    </td>
+                    <td style={{ padding: '1rem 1.5rem', color: 'var(--text-main)' }}>{u.roles?.role_name || u.role_id}</td>
+                    <td style={{ padding: '1rem 1.5rem' }}>
+                      <span style={{ 
+                        padding: '0.25rem 0.75rem', 
+                        borderRadius: '9999px', 
+                        fontSize: '0.75rem',
+                        fontWeight: '600',
+                        backgroundColor: u.is_active ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                        color: u.is_active ? 'var(--secondary)' : 'var(--danger)'
+                      }}>
+                        {u.is_active ? 'Active' : 'Inactive'}
+                      </span>
+                    </td>
+                    <td style={{ padding: '1rem 1.5rem', textAlign: 'right' }}>
+                      <button 
+                        onClick={() => openEditModal(u)}
+                        style={{ 
+                          background: 'none', border: '1px solid var(--primary)', color: 'var(--primary)', 
+                          cursor: 'pointer', padding: '0.5rem 1rem', borderRadius: '6px',
+                          display: 'inline-flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s',
+                          fontWeight: '600', fontSize: '0.85rem'
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'var(--primary)'; e.currentTarget.style.color = '#fff'; }}
+                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--primary)'; }}
+                      >
+                        <Edit size={14} /> Edit
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {filteredUsers.length === 0 && (
+                  <tr>
+                    <td colSpan="6" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                      <Users size={40} style={{ opacity: 0.3, marginBottom: '1rem' }} />
+                      <div>No users found.</div>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Modal */}
       {showModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '1rem' }}>
-          <div style={{ background: '#fff', borderRadius: '8px', padding: '1.5rem', width: '100%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ margin: 0, fontSize: '1.25rem', color: '#1f2937' }}>Edit User</h2>
-              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><X size={20} color="#6b7280" /></button>
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div style={{ backgroundColor: 'var(--surface)', borderRadius: '16px', width: '100%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', border: '1px solid var(--border)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}>
+            
+            <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-main)' }}>Edit User</h2>
+              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}><X size={20} /></button>
             </div>
             
-            {error && <div style={{ color: '#b91c1c', background: '#fee2e2', padding: '0.5rem', borderRadius: '4px', marginBottom: '1rem', fontSize: '0.875rem' }}>{error}</div>}
+            <div style={{ padding: '1.5rem' }}>
+              {error && <div style={{ color: 'var(--danger)', backgroundColor: 'rgba(239, 68, 68, 0.1)', padding: '0.75rem', borderRadius: '8px', marginBottom: '1.5rem', fontSize: '0.85rem', border: '1px solid rgba(239, 68, 68, 0.2)' }}>{error}</div>}
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#1f2937' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.25rem' }}>Full Name</label>
-                <input disabled type="text" name="full_name" value={formData.full_name} onChange={handleInputChange} style={{ width: '100%', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '4px', boxSizing: 'border-box', background: '#f3f4f6', color: '#6b7280' }} />
-              </div>
-              
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.25rem' }}>AD Username</label>
-                  <input disabled type="text" name="username" value={formData.username} onChange={handleInputChange} style={{ width: '100%', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '4px', boxSizing: 'border-box', background: '#f3f4f6', color: '#6b7280' }} />
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.4rem', color: 'var(--text-muted)' }}>Full Name</label>
+                  <input disabled type="text" name="full_name" value={formData.full_name} style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-muted)', cursor: 'not-allowed' }} />
                 </div>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.4rem', color: 'var(--text-muted)' }}>AD Username</label>
+                    <input disabled type="text" name="username" value={formData.username} style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-muted)', cursor: 'not-allowed' }} />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.4rem', color: 'var(--text-muted)' }}>Email</label>
+                    <input disabled type="email" name="email" value={formData.email} style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-muted)', cursor: 'not-allowed' }} />
+                  </div>
+                </div>
+
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.25rem' }}>Email</label>
-                  <input disabled type="email" name="email" value={formData.email} onChange={handleInputChange} style={{ width: '100%', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '4px', boxSizing: 'border-box', background: '#f3f4f6', color: '#6b7280' }} />
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.4rem', color: 'var(--text-muted)' }}>Phone Number</label>
+                  <input type="text" name="phone_number" value={formData.phone_number} onChange={handleInputChange} 
+                    style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }} 
+                    onFocus={e => e.target.style.borderColor = 'var(--primary)'} onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                  />
                 </div>
-              </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.25rem' }}>Phone Number</label>
-                <input type="text" name="phone_number" value={formData.phone_number} onChange={handleInputChange} style={{ width: '100%', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '4px', boxSizing: 'border-box' }} />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.25rem' }}>Role *</label>
-                  <select required name="role_id" value={formData.role_id} onChange={handleInputChange} style={{ width: '100%', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '4px', boxSizing: 'border-box', background: '#fff' }}>
-                    <option value="">Select Role</option>
-                    {lookups.roles.map(r => (
-                      <option key={r.role_id} value={r.role_id}>{r.role_name}</option>
-                    ))}
-                  </select>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.4rem', color: 'var(--text-muted)' }}>Role *</label>
+                    <select required name="role_id" value={formData.role_id} onChange={handleInputChange} 
+                      style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }}
+                      onFocus={e => e.target.style.borderColor = 'var(--primary)'} onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                    >
+                      <option value="">Select Role</option>
+                      {lookups.roles.map(r => (
+                        <option key={r.role_id} value={r.role_id}>{r.role_name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.4rem', color: 'var(--text-muted)' }}>Branch (Optional)</label>
+                    <select name="branch_id" value={formData.branch_id} onChange={handleInputChange} 
+                      style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }}
+                      onFocus={e => e.target.style.borderColor = 'var(--primary)'} onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                    >
+                      <option value="">Select Branch</option>
+                      {lookups.branches.map(b => (
+                        <option key={b.branch_id} value={b.branch_id}>{b.branch_name}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.25rem' }}>Branch (Optional)</label>
-                  <select name="branch_id" value={formData.branch_id} onChange={handleInputChange} style={{ width: '100%', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '4px', boxSizing: 'border-box', background: '#fff' }}>
-                    <option value="">Select Branch</option>
-                    {lookups.branches.map(b => (
-                      <option key={b.branch_id} value={b.branch_id}>{b.branch_name}</option>
-                    ))}
-                  </select>
+
+                <div style={{ padding: '1rem', backgroundColor: 'var(--bg-color)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, color: 'var(--text-main)', cursor: 'pointer' }}>
+                    <input type="checkbox" name="is_active" checked={formData.is_active} onChange={handleInputChange} style={{ width: '18px', height: '18px', accentColor: 'var(--primary)' }} />
+                    Account Active (Can Login)
+                  </label>
                 </div>
-              </div>
 
-              <div>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>
-                  <input type="checkbox" name="is_active" checked={formData.is_active} onChange={handleInputChange} />
-                  Account Active
-                </label>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1rem' }}>
-                <button type="button" onClick={() => setShowModal(false)} style={{ padding: '0.5rem 1rem', background: '#f3f4f6', border: '1px solid #d1d5db', borderRadius: '4px', cursor: 'pointer', color: '#374151' }}>Cancel</button>
-                <button type="submit" style={{ padding: '0.5rem 1rem', background: '#4F46E5', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Save size={16} /> Update User
-                </button>
-              </div>
-            </form>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+                  <button type="button" onClick={() => setShowModal(false)} 
+                    style={{ padding: '0.75rem 1.5rem', backgroundColor: 'transparent', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', color: 'var(--text-muted)', fontWeight: '600' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--text-main)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" 
+                    style={{ padding: '0.75rem 1.5rem', backgroundColor: 'var(--primary)', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '600' }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--primary-dark)'} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--primary)'}
+                  >
+                    <Save size={18} /> Update User
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}

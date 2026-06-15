@@ -284,7 +284,11 @@ exports.Prisma.Preventive_maintenance_logsScalarFieldEnum = {
   performed_date: 'performed_date',
   notes: 'notes',
   next_scheduled_date: 'next_scheduled_date',
-  linked_request_id: 'linked_request_id'
+  linked_request_id: 'linked_request_id',
+  supervisor_user_id: 'supervisor_user_id',
+  supervisor_approved_at: 'supervisor_approved_at',
+  supervisor_notes: 'supervisor_notes',
+  status: 'status'
 };
 
 exports.Prisma.Preventive_maintenance_schedulesScalarFieldEnum = {

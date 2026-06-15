@@ -4331,7 +4331,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers: number
     maintenance_requests_maintenance_requests_user_approved_by_idTousers: number
     notifications: number
-    preventive_maintenance_logs: number
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers: number
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers: number
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers: number
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers: number
     request_disposal_details_request_disposal_details_approved_by_user_idTousers: number
@@ -4351,7 +4352,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: boolean | UsersCountOutputTypeCountMaintenance_requests_maintenance_requests_supervisor_user_idTousersArgs
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: boolean | UsersCountOutputTypeCountMaintenance_requests_maintenance_requests_user_approved_by_idTousersArgs
     notifications?: boolean | UsersCountOutputTypeCountNotificationsArgs
-    preventive_maintenance_logs?: boolean | UsersCountOutputTypeCountPreventive_maintenance_logsArgs
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | UsersCountOutputTypeCountPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersArgs
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | UsersCountOutputTypeCountPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersArgs
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: boolean | UsersCountOutputTypeCountPreventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousersArgs
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: boolean | UsersCountOutputTypeCountPreventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousersArgs
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: boolean | UsersCountOutputTypeCountRequest_disposal_details_request_disposal_details_approved_by_user_idTousersArgs
@@ -4432,7 +4434,14 @@ export namespace Prisma {
   /**
    * UsersCountOutputType without action
    */
-  export type UsersCountOutputTypeCountPreventive_maintenance_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsersCountOutputTypeCountPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: preventive_maintenance_logsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: preventive_maintenance_logsWhereInput
   }
 
@@ -20649,6 +20658,7 @@ export namespace Prisma {
     schedule_id: number | null
     performed_by_user_id: number | null
     linked_request_id: number | null
+    supervisor_user_id: number | null
   }
 
   export type Preventive_maintenance_logsSumAggregateOutputType = {
@@ -20656,6 +20666,7 @@ export namespace Prisma {
     schedule_id: number | null
     performed_by_user_id: number | null
     linked_request_id: number | null
+    supervisor_user_id: number | null
   }
 
   export type Preventive_maintenance_logsMinAggregateOutputType = {
@@ -20666,6 +20677,10 @@ export namespace Prisma {
     notes: string | null
     next_scheduled_date: Date | null
     linked_request_id: number | null
+    supervisor_user_id: number | null
+    supervisor_approved_at: Date | null
+    supervisor_notes: string | null
+    status: string | null
   }
 
   export type Preventive_maintenance_logsMaxAggregateOutputType = {
@@ -20676,6 +20691,10 @@ export namespace Prisma {
     notes: string | null
     next_scheduled_date: Date | null
     linked_request_id: number | null
+    supervisor_user_id: number | null
+    supervisor_approved_at: Date | null
+    supervisor_notes: string | null
+    status: string | null
   }
 
   export type Preventive_maintenance_logsCountAggregateOutputType = {
@@ -20686,6 +20705,10 @@ export namespace Prisma {
     notes: number
     next_scheduled_date: number
     linked_request_id: number
+    supervisor_user_id: number
+    supervisor_approved_at: number
+    supervisor_notes: number
+    status: number
     _all: number
   }
 
@@ -20695,6 +20718,7 @@ export namespace Prisma {
     schedule_id?: true
     performed_by_user_id?: true
     linked_request_id?: true
+    supervisor_user_id?: true
   }
 
   export type Preventive_maintenance_logsSumAggregateInputType = {
@@ -20702,6 +20726,7 @@ export namespace Prisma {
     schedule_id?: true
     performed_by_user_id?: true
     linked_request_id?: true
+    supervisor_user_id?: true
   }
 
   export type Preventive_maintenance_logsMinAggregateInputType = {
@@ -20712,6 +20737,10 @@ export namespace Prisma {
     notes?: true
     next_scheduled_date?: true
     linked_request_id?: true
+    supervisor_user_id?: true
+    supervisor_approved_at?: true
+    supervisor_notes?: true
+    status?: true
   }
 
   export type Preventive_maintenance_logsMaxAggregateInputType = {
@@ -20722,6 +20751,10 @@ export namespace Prisma {
     notes?: true
     next_scheduled_date?: true
     linked_request_id?: true
+    supervisor_user_id?: true
+    supervisor_approved_at?: true
+    supervisor_notes?: true
+    status?: true
   }
 
   export type Preventive_maintenance_logsCountAggregateInputType = {
@@ -20732,6 +20765,10 @@ export namespace Prisma {
     notes?: true
     next_scheduled_date?: true
     linked_request_id?: true
+    supervisor_user_id?: true
+    supervisor_approved_at?: true
+    supervisor_notes?: true
+    status?: true
     _all?: true
   }
 
@@ -20829,6 +20866,10 @@ export namespace Prisma {
     notes: string | null
     next_scheduled_date: Date | null
     linked_request_id: number | null
+    supervisor_user_id: number | null
+    supervisor_approved_at: Date | null
+    supervisor_notes: string | null
+    status: string | null
     _count: Preventive_maintenance_logsCountAggregateOutputType | null
     _avg: Preventive_maintenance_logsAvgAggregateOutputType | null
     _sum: Preventive_maintenance_logsSumAggregateOutputType | null
@@ -20858,8 +20899,13 @@ export namespace Prisma {
     notes?: boolean
     next_scheduled_date?: boolean
     linked_request_id?: boolean
+    supervisor_user_id?: boolean
+    supervisor_approved_at?: boolean
+    supervisor_notes?: boolean
+    status?: boolean
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
-    users?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules?: boolean | preventive_maintenance_schedulesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["preventive_maintenance_logs"]>
 
@@ -20871,8 +20917,13 @@ export namespace Prisma {
     notes?: boolean
     next_scheduled_date?: boolean
     linked_request_id?: boolean
+    supervisor_user_id?: boolean
+    supervisor_approved_at?: boolean
+    supervisor_notes?: boolean
+    status?: boolean
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
-    users?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules?: boolean | preventive_maintenance_schedulesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["preventive_maintenance_logs"]>
 
@@ -20884,8 +20935,13 @@ export namespace Prisma {
     notes?: boolean
     next_scheduled_date?: boolean
     linked_request_id?: boolean
+    supervisor_user_id?: boolean
+    supervisor_approved_at?: boolean
+    supervisor_notes?: boolean
+    status?: boolean
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
-    users?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules?: boolean | preventive_maintenance_schedulesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["preventive_maintenance_logs"]>
 
@@ -20897,22 +20953,29 @@ export namespace Prisma {
     notes?: boolean
     next_scheduled_date?: boolean
     linked_request_id?: boolean
+    supervisor_user_id?: boolean
+    supervisor_approved_at?: boolean
+    supervisor_notes?: boolean
+    status?: boolean
   }
 
-  export type preventive_maintenance_logsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"log_id" | "schedule_id" | "performed_by_user_id" | "performed_date" | "notes" | "next_scheduled_date" | "linked_request_id", ExtArgs["result"]["preventive_maintenance_logs"]>
+  export type preventive_maintenance_logsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"log_id" | "schedule_id" | "performed_by_user_id" | "performed_date" | "notes" | "next_scheduled_date" | "linked_request_id" | "supervisor_user_id" | "supervisor_approved_at" | "supervisor_notes" | "status", ExtArgs["result"]["preventive_maintenance_logs"]>
   export type preventive_maintenance_logsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
-    users?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules?: boolean | preventive_maintenance_schedulesDefaultArgs<ExtArgs>
   }
   export type preventive_maintenance_logsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
-    users?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules?: boolean | preventive_maintenance_schedulesDefaultArgs<ExtArgs>
   }
   export type preventive_maintenance_logsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
-    users?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules?: boolean | preventive_maintenance_schedulesDefaultArgs<ExtArgs>
   }
 
@@ -20920,7 +20983,8 @@ export namespace Prisma {
     name: "preventive_maintenance_logs"
     objects: {
       maintenance_requests: Prisma.$maintenance_requestsPayload<ExtArgs> | null
-      users: Prisma.$usersPayload<ExtArgs>
+      users_preventive_maintenance_logs_performed_by_user_idTousers: Prisma.$usersPayload<ExtArgs>
+      users_preventive_maintenance_logs_supervisor_user_idTousers: Prisma.$usersPayload<ExtArgs> | null
       preventive_maintenance_schedules: Prisma.$preventive_maintenance_schedulesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -20931,6 +20995,10 @@ export namespace Prisma {
       notes: string | null
       next_scheduled_date: Date | null
       linked_request_id: number | null
+      supervisor_user_id: number | null
+      supervisor_approved_at: Date | null
+      supervisor_notes: string | null
+      status: string | null
     }, ExtArgs["result"]["preventive_maintenance_logs"]>
     composites: {}
   }
@@ -21326,7 +21394,8 @@ export namespace Prisma {
   export interface Prisma__preventive_maintenance_logsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     maintenance_requests<T extends preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs> = {}>(args?: Subset<T, preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>>): Prisma__maintenance_requestsClient<$Result.GetResult<Prisma.$maintenance_requestsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    users_preventive_maintenance_logs_performed_by_user_idTousers<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    users_preventive_maintenance_logs_supervisor_user_idTousers<T extends preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     preventive_maintenance_schedules<T extends preventive_maintenance_schedulesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, preventive_maintenance_schedulesDefaultArgs<ExtArgs>>): Prisma__preventive_maintenance_schedulesClient<$Result.GetResult<Prisma.$preventive_maintenance_schedulesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -21364,6 +21433,10 @@ export namespace Prisma {
     readonly notes: FieldRef<"preventive_maintenance_logs", 'String'>
     readonly next_scheduled_date: FieldRef<"preventive_maintenance_logs", 'DateTime'>
     readonly linked_request_id: FieldRef<"preventive_maintenance_logs", 'Int'>
+    readonly supervisor_user_id: FieldRef<"preventive_maintenance_logs", 'Int'>
+    readonly supervisor_approved_at: FieldRef<"preventive_maintenance_logs", 'DateTime'>
+    readonly supervisor_notes: FieldRef<"preventive_maintenance_logs", 'String'>
+    readonly status: FieldRef<"preventive_maintenance_logs", 'String'>
   }
     
 
@@ -21781,6 +21854,25 @@ export namespace Prisma {
      */
     include?: maintenance_requestsInclude<ExtArgs> | null
     where?: maintenance_requestsWhereInput
+  }
+
+  /**
+   * preventive_maintenance_logs.users_preventive_maintenance_logs_supervisor_user_idTousers
+   */
+  export type preventive_maintenance_logs$users_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    where?: usersWhereInput
   }
 
   /**
@@ -36274,7 +36366,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: boolean | users$maintenance_requests_maintenance_requests_supervisor_user_idTousersArgs<ExtArgs>
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: boolean | users$maintenance_requests_maintenance_requests_user_approved_by_idTousersArgs<ExtArgs>
     notifications?: boolean | users$notificationsArgs<ExtArgs>
-    preventive_maintenance_logs?: boolean | users$preventive_maintenance_logsArgs<ExtArgs>
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | users$preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersArgs<ExtArgs>
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | users$preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: boolean | users$preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: boolean | users$preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousersArgs<ExtArgs>
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: boolean | users$request_disposal_details_request_disposal_details_approved_by_user_idTousersArgs<ExtArgs>
@@ -36338,7 +36431,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: boolean | users$maintenance_requests_maintenance_requests_supervisor_user_idTousersArgs<ExtArgs>
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: boolean | users$maintenance_requests_maintenance_requests_user_approved_by_idTousersArgs<ExtArgs>
     notifications?: boolean | users$notificationsArgs<ExtArgs>
-    preventive_maintenance_logs?: boolean | users$preventive_maintenance_logsArgs<ExtArgs>
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | users$preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersArgs<ExtArgs>
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: boolean | users$preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: boolean | users$preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousersArgs<ExtArgs>
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: boolean | users$preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousersArgs<ExtArgs>
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: boolean | users$request_disposal_details_request_disposal_details_approved_by_user_idTousersArgs<ExtArgs>
@@ -36371,7 +36465,8 @@ export namespace Prisma {
       maintenance_requests_maintenance_requests_supervisor_user_idTousers: Prisma.$maintenance_requestsPayload<ExtArgs>[]
       maintenance_requests_maintenance_requests_user_approved_by_idTousers: Prisma.$maintenance_requestsPayload<ExtArgs>[]
       notifications: Prisma.$notificationsPayload<ExtArgs>[]
-      preventive_maintenance_logs: Prisma.$preventive_maintenance_logsPayload<ExtArgs>[]
+      preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers: Prisma.$preventive_maintenance_logsPayload<ExtArgs>[]
+      preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers: Prisma.$preventive_maintenance_logsPayload<ExtArgs>[]
       preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers: Prisma.$preventive_maintenance_schedulesPayload<ExtArgs>[]
       preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers: Prisma.$preventive_maintenance_schedulesPayload<ExtArgs>[]
       request_disposal_details_request_disposal_details_approved_by_user_idTousers: Prisma.$request_disposal_detailsPayload<ExtArgs>[]
@@ -36795,7 +36890,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers<T extends users$maintenance_requests_maintenance_requests_supervisor_user_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$maintenance_requests_maintenance_requests_supervisor_user_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$maintenance_requestsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     maintenance_requests_maintenance_requests_user_approved_by_idTousers<T extends users$maintenance_requests_maintenance_requests_user_approved_by_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$maintenance_requests_maintenance_requests_user_approved_by_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$maintenance_requestsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends users$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, users$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$notificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    preventive_maintenance_logs<T extends users$preventive_maintenance_logsArgs<ExtArgs> = {}>(args?: Subset<T, users$preventive_maintenance_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$preventive_maintenance_logsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers<T extends users$preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$preventive_maintenance_logsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers<T extends users$preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$preventive_maintenance_logsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers<T extends users$preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$preventive_maintenance_schedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers<T extends users$preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$preventive_maintenance_schedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     request_disposal_details_request_disposal_details_approved_by_user_idTousers<T extends users$request_disposal_details_request_disposal_details_approved_by_user_idTousersArgs<ExtArgs> = {}>(args?: Subset<T, users$request_disposal_details_request_disposal_details_approved_by_user_idTousersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$request_disposal_detailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -37437,9 +37533,33 @@ export namespace Prisma {
   }
 
   /**
-   * users.preventive_maintenance_logs
+   * users.preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers
    */
-  export type users$preventive_maintenance_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type users$preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the preventive_maintenance_logs
+     */
+    select?: preventive_maintenance_logsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the preventive_maintenance_logs
+     */
+    omit?: preventive_maintenance_logsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: preventive_maintenance_logsInclude<ExtArgs> | null
+    where?: preventive_maintenance_logsWhereInput
+    orderBy?: preventive_maintenance_logsOrderByWithRelationInput | preventive_maintenance_logsOrderByWithRelationInput[]
+    cursor?: preventive_maintenance_logsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Preventive_maintenance_logsScalarFieldEnum | Preventive_maintenance_logsScalarFieldEnum[]
+  }
+
+  /**
+   * users.preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers
+   */
+  export type users$preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the preventive_maintenance_logs
      */
@@ -43682,7 +43802,11 @@ export namespace Prisma {
     performed_date: 'performed_date',
     notes: 'notes',
     next_scheduled_date: 'next_scheduled_date',
-    linked_request_id: 'linked_request_id'
+    linked_request_id: 'linked_request_id',
+    supervisor_user_id: 'supervisor_user_id',
+    supervisor_approved_at: 'supervisor_approved_at',
+    supervisor_notes: 'supervisor_notes',
+    status: 'status'
   };
 
   export type Preventive_maintenance_logsScalarFieldEnum = (typeof Preventive_maintenance_logsScalarFieldEnum)[keyof typeof Preventive_maintenance_logsScalarFieldEnum]
@@ -45251,8 +45375,13 @@ export namespace Prisma {
     notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
     next_scheduled_date?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
     linked_request_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_user_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_approved_at?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
+    supervisor_notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    status?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
     maintenance_requests?: XOR<Maintenance_requestsNullableScalarRelationFilter, maintenance_requestsWhereInput> | null
-    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: XOR<UsersNullableScalarRelationFilter, usersWhereInput> | null
     preventive_maintenance_schedules?: XOR<Preventive_maintenance_schedulesScalarRelationFilter, preventive_maintenance_schedulesWhereInput>
   }
 
@@ -45264,8 +45393,13 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     next_scheduled_date?: SortOrderInput | SortOrder
     linked_request_id?: SortOrderInput | SortOrder
+    supervisor_user_id?: SortOrderInput | SortOrder
+    supervisor_approved_at?: SortOrderInput | SortOrder
+    supervisor_notes?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
     maintenance_requests?: maintenance_requestsOrderByWithRelationInput
-    users?: usersOrderByWithRelationInput
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: usersOrderByWithRelationInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersOrderByWithRelationInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesOrderByWithRelationInput
   }
 
@@ -45280,8 +45414,13 @@ export namespace Prisma {
     notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
     next_scheduled_date?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
     linked_request_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_user_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_approved_at?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
+    supervisor_notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    status?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
     maintenance_requests?: XOR<Maintenance_requestsNullableScalarRelationFilter, maintenance_requestsWhereInput> | null
-    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: XOR<UsersNullableScalarRelationFilter, usersWhereInput> | null
     preventive_maintenance_schedules?: XOR<Preventive_maintenance_schedulesScalarRelationFilter, preventive_maintenance_schedulesWhereInput>
   }, "log_id">
 
@@ -45293,6 +45432,10 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     next_scheduled_date?: SortOrderInput | SortOrder
     linked_request_id?: SortOrderInput | SortOrder
+    supervisor_user_id?: SortOrderInput | SortOrder
+    supervisor_approved_at?: SortOrderInput | SortOrder
+    supervisor_notes?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
     _count?: preventive_maintenance_logsCountOrderByAggregateInput
     _avg?: preventive_maintenance_logsAvgOrderByAggregateInput
     _max?: preventive_maintenance_logsMaxOrderByAggregateInput
@@ -45311,6 +45454,10 @@ export namespace Prisma {
     notes?: StringNullableWithAggregatesFilter<"preventive_maintenance_logs"> | string | null
     next_scheduled_date?: DateTimeNullableWithAggregatesFilter<"preventive_maintenance_logs"> | Date | string | null
     linked_request_id?: IntNullableWithAggregatesFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_user_id?: IntNullableWithAggregatesFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_approved_at?: DateTimeNullableWithAggregatesFilter<"preventive_maintenance_logs"> | Date | string | null
+    supervisor_notes?: StringNullableWithAggregatesFilter<"preventive_maintenance_logs"> | string | null
+    status?: StringNullableWithAggregatesFilter<"preventive_maintenance_logs"> | string | null
   }
 
   export type preventive_maintenance_schedulesWhereInput = {
@@ -46237,7 +46384,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: Maintenance_requestsListRelationFilter
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: Maintenance_requestsListRelationFilter
     notifications?: NotificationsListRelationFilter
-    preventive_maintenance_logs?: Preventive_maintenance_logsListRelationFilter
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: Preventive_maintenance_logsListRelationFilter
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: Preventive_maintenance_logsListRelationFilter
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: Preventive_maintenance_schedulesListRelationFilter
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: Preventive_maintenance_schedulesListRelationFilter
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: Request_disposal_detailsListRelationFilter
@@ -46268,7 +46416,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsOrderByRelationAggregateInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsOrderByRelationAggregateInput
     notifications?: notificationsOrderByRelationAggregateInput
-    preventive_maintenance_logs?: preventive_maintenance_logsOrderByRelationAggregateInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsOrderByRelationAggregateInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsOrderByRelationAggregateInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesOrderByRelationAggregateInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesOrderByRelationAggregateInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsOrderByRelationAggregateInput
@@ -46302,7 +46451,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: Maintenance_requestsListRelationFilter
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: Maintenance_requestsListRelationFilter
     notifications?: NotificationsListRelationFilter
-    preventive_maintenance_logs?: Preventive_maintenance_logsListRelationFilter
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: Preventive_maintenance_logsListRelationFilter
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: Preventive_maintenance_logsListRelationFilter
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: Preventive_maintenance_schedulesListRelationFilter
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: Preventive_maintenance_schedulesListRelationFilter
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: Request_disposal_detailsListRelationFilter
@@ -47844,8 +47994,12 @@ export namespace Prisma {
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
     maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
-    users: usersCreateNestedOneWithoutPreventive_maintenance_logsInput
+    users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules: preventive_maintenance_schedulesCreateNestedOneWithoutPreventive_maintenance_logsInput
   }
 
@@ -47857,14 +48011,22 @@ export namespace Prisma {
     notes?: string | null
     next_scheduled_date?: Date | string | null
     linked_request_id?: number | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
   export type preventive_maintenance_logsUpdateInput = {
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
-    users?: usersUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersUpdateOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput
   }
 
@@ -47876,6 +48038,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type preventive_maintenance_logsCreateManyInput = {
@@ -47886,12 +48052,19 @@ export namespace Prisma {
     notes?: string | null
     next_scheduled_date?: Date | string | null
     linked_request_id?: number | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
   export type preventive_maintenance_logsUpdateManyMutationInput = {
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type preventive_maintenance_logsUncheckedUpdateManyInput = {
@@ -47902,6 +48075,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type preventive_maintenance_schedulesCreateInput = {
@@ -48791,7 +48968,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -48822,7 +49000,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -48848,7 +49027,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -48879,7 +49059,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -50407,6 +50588,10 @@ export namespace Prisma {
     notes?: SortOrder
     next_scheduled_date?: SortOrder
     linked_request_id?: SortOrder
+    supervisor_user_id?: SortOrder
+    supervisor_approved_at?: SortOrder
+    supervisor_notes?: SortOrder
+    status?: SortOrder
   }
 
   export type preventive_maintenance_logsAvgOrderByAggregateInput = {
@@ -50414,6 +50599,7 @@ export namespace Prisma {
     schedule_id?: SortOrder
     performed_by_user_id?: SortOrder
     linked_request_id?: SortOrder
+    supervisor_user_id?: SortOrder
   }
 
   export type preventive_maintenance_logsMaxOrderByAggregateInput = {
@@ -50424,6 +50610,10 @@ export namespace Prisma {
     notes?: SortOrder
     next_scheduled_date?: SortOrder
     linked_request_id?: SortOrder
+    supervisor_user_id?: SortOrder
+    supervisor_approved_at?: SortOrder
+    supervisor_notes?: SortOrder
+    status?: SortOrder
   }
 
   export type preventive_maintenance_logsMinOrderByAggregateInput = {
@@ -50434,6 +50624,10 @@ export namespace Prisma {
     notes?: SortOrder
     next_scheduled_date?: SortOrder
     linked_request_id?: SortOrder
+    supervisor_user_id?: SortOrder
+    supervisor_approved_at?: SortOrder
+    supervisor_notes?: SortOrder
+    status?: SortOrder
   }
 
   export type preventive_maintenance_logsSumOrderByAggregateInput = {
@@ -50441,6 +50635,7 @@ export namespace Prisma {
     schedule_id?: SortOrder
     performed_by_user_id?: SortOrder
     linked_request_id?: SortOrder
+    supervisor_user_id?: SortOrder
   }
 
   export type Enumfrequency_type_enumNullableFilter<$PrismaModel = never> = {
@@ -52925,9 +53120,15 @@ export namespace Prisma {
     connect?: maintenance_requestsWhereUniqueInput
   }
 
-  export type usersCreateNestedOneWithoutPreventive_maintenance_logsInput = {
-    create?: XOR<usersCreateWithoutPreventive_maintenance_logsInput, usersUncheckedCreateWithoutPreventive_maintenance_logsInput>
-    connectOrCreate?: usersCreateOrConnectWithoutPreventive_maintenance_logsInput
+  export type usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
+    create?: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    create?: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
     connect?: usersWhereUniqueInput
   }
 
@@ -52947,12 +53148,22 @@ export namespace Prisma {
     update?: XOR<XOR<maintenance_requestsUpdateToOneWithWhereWithoutPreventive_maintenance_logsInput, maintenance_requestsUpdateWithoutPreventive_maintenance_logsInput>, maintenance_requestsUncheckedUpdateWithoutPreventive_maintenance_logsInput>
   }
 
-  export type usersUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput = {
-    create?: XOR<usersCreateWithoutPreventive_maintenance_logsInput, usersUncheckedCreateWithoutPreventive_maintenance_logsInput>
-    connectOrCreate?: usersCreateOrConnectWithoutPreventive_maintenance_logsInput
-    upsert?: usersUpsertWithoutPreventive_maintenance_logsInput
+  export type usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput = {
+    create?: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
+    upsert?: usersUpsertWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
     connect?: usersWhereUniqueInput
-    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutPreventive_maintenance_logsInput, usersUpdateWithoutPreventive_maintenance_logsInput>, usersUncheckedUpdateWithoutPreventive_maintenance_logsInput>
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput, usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>, usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>
+  }
+
+  export type usersUpdateOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersNestedInput = {
+    create?: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>
+    connectOrCreate?: usersCreateOrConnectWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
+    upsert?: usersUpsertWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
+    disconnect?: usersWhereInput | boolean
+    delete?: usersWhereInput | boolean
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput, usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>, usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>
   }
 
   export type preventive_maintenance_schedulesUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput = {
@@ -53677,10 +53888,17 @@ export namespace Prisma {
     connect?: notificationsWhereUniqueInput | notificationsWhereUniqueInput[]
   }
 
-  export type preventive_maintenance_logsCreateNestedManyWithoutUsersInput = {
-    create?: XOR<preventive_maintenance_logsCreateWithoutUsersInput, preventive_maintenance_logsUncheckedCreateWithoutUsersInput> | preventive_maintenance_logsCreateWithoutUsersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsersInput | preventive_maintenance_logsCreateOrConnectWithoutUsersInput[]
-    createMany?: preventive_maintenance_logsCreateManyUsersInputEnvelope
+  export type preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInputEnvelope
+    connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+  }
+
+  export type preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInputEnvelope
     connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
   }
 
@@ -53808,10 +54026,17 @@ export namespace Prisma {
     connect?: notificationsWhereUniqueInput | notificationsWhereUniqueInput[]
   }
 
-  export type preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput = {
-    create?: XOR<preventive_maintenance_logsCreateWithoutUsersInput, preventive_maintenance_logsUncheckedCreateWithoutUsersInput> | preventive_maintenance_logsCreateWithoutUsersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsersInput | preventive_maintenance_logsCreateOrConnectWithoutUsersInput[]
-    createMany?: preventive_maintenance_logsCreateManyUsersInputEnvelope
+  export type preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInputEnvelope
+    connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+  }
+
+  export type preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInputEnvelope
     connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
   }
 
@@ -53983,17 +54208,31 @@ export namespace Prisma {
     deleteMany?: notificationsScalarWhereInput | notificationsScalarWhereInput[]
   }
 
-  export type preventive_maintenance_logsUpdateManyWithoutUsersNestedInput = {
-    create?: XOR<preventive_maintenance_logsCreateWithoutUsersInput, preventive_maintenance_logsUncheckedCreateWithoutUsersInput> | preventive_maintenance_logsCreateWithoutUsersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsersInput | preventive_maintenance_logsCreateOrConnectWithoutUsersInput[]
-    upsert?: preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsersInput | preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsersInput[]
-    createMany?: preventive_maintenance_logsCreateManyUsersInputEnvelope
+  export type preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    upsert?: preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInputEnvelope
     set?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
     disconnect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
     delete?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
     connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
-    update?: preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsersInput | preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsersInput[]
-    updateMany?: preventive_maintenance_logsUpdateManyWithWhereWithoutUsersInput | preventive_maintenance_logsUpdateManyWithWhereWithoutUsersInput[]
+    update?: preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    updateMany?: preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    deleteMany?: preventive_maintenance_logsScalarWhereInput | preventive_maintenance_logsScalarWhereInput[]
+  }
+
+  export type preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    upsert?: preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInputEnvelope
+    set?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    disconnect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    delete?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    update?: preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    updateMany?: preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
     deleteMany?: preventive_maintenance_logsScalarWhereInput | preventive_maintenance_logsScalarWhereInput[]
   }
 
@@ -54239,17 +54478,31 @@ export namespace Prisma {
     deleteMany?: notificationsScalarWhereInput | notificationsScalarWhereInput[]
   }
 
-  export type preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput = {
-    create?: XOR<preventive_maintenance_logsCreateWithoutUsersInput, preventive_maintenance_logsUncheckedCreateWithoutUsersInput> | preventive_maintenance_logsCreateWithoutUsersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsersInput | preventive_maintenance_logsCreateOrConnectWithoutUsersInput[]
-    upsert?: preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsersInput | preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsersInput[]
-    createMany?: preventive_maintenance_logsCreateManyUsersInputEnvelope
+  export type preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    upsert?: preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInputEnvelope
     set?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
     disconnect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
     delete?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
     connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
-    update?: preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsersInput | preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsersInput[]
-    updateMany?: preventive_maintenance_logsUpdateManyWithWhereWithoutUsersInput | preventive_maintenance_logsUpdateManyWithWhereWithoutUsersInput[]
+    update?: preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    updateMany?: preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    deleteMany?: preventive_maintenance_logsScalarWhereInput | preventive_maintenance_logsScalarWhereInput[]
+  }
+
+  export type preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput = {
+    create?: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput> | preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[] | preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    connectOrCreate?: preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    upsert?: preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    createMany?: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInputEnvelope
+    set?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    disconnect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    delete?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    connect?: preventive_maintenance_logsWhereUniqueInput | preventive_maintenance_logsWhereUniqueInput[]
+    update?: preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
+    updateMany?: preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
     deleteMany?: preventive_maintenance_logsScalarWhereInput | preventive_maintenance_logsScalarWhereInput[]
   }
 
@@ -55505,7 +55758,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -55535,7 +55789,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -55634,7 +55889,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -55664,7 +55920,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -56094,7 +56351,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -56124,7 +56382,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -56165,7 +56424,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -56195,7 +56455,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -56410,7 +56671,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -56439,7 +56701,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57217,7 +57480,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57247,7 +57511,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57277,7 +57542,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57307,7 +57573,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57411,7 +57678,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57441,7 +57709,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57489,7 +57758,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57519,7 +57789,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57549,7 +57820,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57579,7 +57851,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -57636,7 +57909,11 @@ export namespace Prisma {
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
-    users: usersCreateNestedOneWithoutPreventive_maintenance_logsInput
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
+    users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules: preventive_maintenance_schedulesCreateNestedOneWithoutPreventive_maintenance_logsInput
   }
 
@@ -57647,6 +57924,10 @@ export namespace Prisma {
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
   export type preventive_maintenance_logsCreateOrConnectWithoutMaintenance_requestsInput = {
@@ -58037,7 +58318,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58067,7 +58349,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58103,7 +58386,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58133,7 +58417,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58261,7 +58546,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58291,7 +58577,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58351,7 +58638,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58381,7 +58669,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58417,7 +58706,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58447,7 +58737,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58519,6 +58810,10 @@ export namespace Prisma {
     notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
     next_scheduled_date?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
     linked_request_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_user_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
+    supervisor_approved_at?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
+    supervisor_notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    status?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
   }
 
   export type request_disposal_detailsUpsertWithWhereUniqueWithoutMaintenance_requestsInput = {
@@ -58788,7 +59083,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -58818,7 +59114,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -58957,7 +59254,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -58987,7 +59285,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -59203,7 +59502,7 @@ export namespace Prisma {
     create: XOR<maintenance_requestsCreateWithoutPreventive_maintenance_logsInput, maintenance_requestsUncheckedCreateWithoutPreventive_maintenance_logsInput>
   }
 
-  export type usersCreateWithoutPreventive_maintenance_logsInput = {
+  export type usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     full_name: string
     username: string
     email: string
@@ -59218,6 +59517,7 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -59230,7 +59530,7 @@ export namespace Prisma {
     roles: rolesCreateNestedOneWithoutUsersInput
   }
 
-  export type usersUncheckedCreateWithoutPreventive_maintenance_logsInput = {
+  export type usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     user_id?: number
     full_name: string
     username: string
@@ -59248,6 +59548,7 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -59258,9 +59559,71 @@ export namespace Prisma {
     request_spare_parts_used?: request_spare_parts_usedUncheckedCreateNestedManyWithoutUsersInput
   }
 
-  export type usersCreateOrConnectWithoutPreventive_maintenance_logsInput = {
+  export type usersCreateOrConnectWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     where: usersWhereUniqueInput
-    create: XOR<usersCreateWithoutPreventive_maintenance_logsInput, usersUncheckedCreateWithoutPreventive_maintenance_logsInput>
+    create: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>
+  }
+
+  export type usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    full_name: string
+    username: string
+    email: string
+    phone_number?: string | null
+    is_active?: boolean | null
+    created_at?: Date | string | null
+    asset_status_history?: asset_status_historyCreateNestedManyWithoutUsersInput
+    audit_logs?: audit_logsCreateNestedManyWithoutUsersInput
+    maintenance_requests_maintenance_requests_assigned_by_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_assigned_by_user_idTousersInput
+    maintenance_requests_maintenance_requests_assigned_technician_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_assigned_technician_idTousersInput
+    maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
+    maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
+    maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
+    notifications?: notificationsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
+    request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
+    request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
+    request_escalations?: request_escalationsCreateNestedManyWithoutUsersInput
+    request_on_hold_details?: request_on_hold_detailsCreateNestedManyWithoutUsersInput
+    request_resolution_details?: request_resolution_detailsCreateNestedManyWithoutUsersInput
+    request_spare_parts_used?: request_spare_parts_usedCreateNestedManyWithoutUsersInput
+    branches?: branchesCreateNestedOneWithoutUsersInput
+    roles: rolesCreateNestedOneWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    user_id?: number
+    full_name: string
+    username: string
+    email: string
+    phone_number?: string | null
+    role_id: number
+    branch_id?: number | null
+    is_active?: boolean | null
+    created_at?: Date | string | null
+    asset_status_history?: asset_status_historyUncheckedCreateNestedManyWithoutUsersInput
+    audit_logs?: audit_logsUncheckedCreateNestedManyWithoutUsersInput
+    maintenance_requests_maintenance_requests_assigned_by_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_assigned_by_user_idTousersInput
+    maintenance_requests_maintenance_requests_assigned_technician_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_assigned_technician_idTousersInput
+    maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_requester_user_idTousersInput
+    maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
+    maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
+    notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
+    request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
+    request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
+    request_escalations?: request_escalationsUncheckedCreateNestedManyWithoutUsersInput
+    request_on_hold_details?: request_on_hold_detailsUncheckedCreateNestedManyWithoutUsersInput
+    request_resolution_details?: request_resolution_detailsUncheckedCreateNestedManyWithoutUsersInput
+    request_spare_parts_used?: request_spare_parts_usedUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>
   }
 
   export type preventive_maintenance_schedulesCreateWithoutPreventive_maintenance_logsInput = {
@@ -59391,18 +59754,18 @@ export namespace Prisma {
     vendor_request_assignments?: vendor_request_assignmentsUncheckedUpdateManyWithoutMaintenance_requestsNestedInput
   }
 
-  export type usersUpsertWithoutPreventive_maintenance_logsInput = {
-    update: XOR<usersUpdateWithoutPreventive_maintenance_logsInput, usersUncheckedUpdateWithoutPreventive_maintenance_logsInput>
-    create: XOR<usersCreateWithoutPreventive_maintenance_logsInput, usersUncheckedCreateWithoutPreventive_maintenance_logsInput>
+  export type usersUpsertWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
+    update: XOR<usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput, usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>
+    create: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>
     where?: usersWhereInput
   }
 
-  export type usersUpdateToOneWithWhereWithoutPreventive_maintenance_logsInput = {
+  export type usersUpdateToOneWithWhereWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     where?: usersWhereInput
-    data: XOR<usersUpdateWithoutPreventive_maintenance_logsInput, usersUncheckedUpdateWithoutPreventive_maintenance_logsInput>
+    data: XOR<usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput, usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput>
   }
 
-  export type usersUpdateWithoutPreventive_maintenance_logsInput = {
+  export type usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     full_name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -59417,6 +59780,7 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -59429,7 +59793,7 @@ export namespace Prisma {
     roles?: rolesUpdateOneRequiredWithoutUsersNestedInput
   }
 
-  export type usersUncheckedUpdateWithoutPreventive_maintenance_logsInput = {
+  export type usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     user_id?: IntFieldUpdateOperationsInput | number
     full_name?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
@@ -59447,6 +59811,75 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
+    request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
+    request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
+    request_escalations?: request_escalationsUncheckedUpdateManyWithoutUsersNestedInput
+    request_on_hold_details?: request_on_hold_detailsUncheckedUpdateManyWithoutUsersNestedInput
+    request_resolution_details?: request_resolution_detailsUncheckedUpdateManyWithoutUsersNestedInput
+    request_spare_parts_used?: request_spare_parts_usedUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUpsertWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    update: XOR<usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput, usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>
+    create: XOR<usersCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput, usersUncheckedCreateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput, usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput>
+  }
+
+  export type usersUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    full_name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset_status_history?: asset_status_historyUpdateManyWithoutUsersNestedInput
+    audit_logs?: audit_logsUpdateManyWithoutUsersNestedInput
+    maintenance_requests_maintenance_requests_assigned_by_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_assigned_by_user_idTousersNestedInput
+    maintenance_requests_maintenance_requests_assigned_technician_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_assigned_technician_idTousersNestedInput
+    maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
+    maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
+    maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
+    notifications?: notificationsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
+    preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
+    request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
+    request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
+    request_escalations?: request_escalationsUpdateManyWithoutUsersNestedInput
+    request_on_hold_details?: request_on_hold_detailsUpdateManyWithoutUsersNestedInput
+    request_resolution_details?: request_resolution_detailsUpdateManyWithoutUsersNestedInput
+    request_spare_parts_used?: request_spare_parts_usedUpdateManyWithoutUsersNestedInput
+    branches?: branchesUpdateOneWithoutUsersNestedInput
+    roles?: rolesUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    full_name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    role_id?: IntFieldUpdateOperationsInput | number
+    branch_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    asset_status_history?: asset_status_historyUncheckedUpdateManyWithoutUsersNestedInput
+    audit_logs?: audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+    maintenance_requests_maintenance_requests_assigned_by_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_assigned_by_user_idTousersNestedInput
+    maintenance_requests_maintenance_requests_assigned_technician_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_assigned_technician_idTousersNestedInput
+    maintenance_requests_maintenance_requests_requester_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_requester_user_idTousersNestedInput
+    maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
+    maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
+    notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -59513,8 +59946,12 @@ export namespace Prisma {
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
     maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
-    users: usersCreateNestedOneWithoutPreventive_maintenance_logsInput
+    users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
   }
 
   export type preventive_maintenance_logsUncheckedCreateWithoutPreventive_maintenance_schedulesInput = {
@@ -59524,6 +59961,10 @@ export namespace Prisma {
     notes?: string | null
     next_scheduled_date?: Date | string | null
     linked_request_id?: number | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
   export type preventive_maintenance_logsCreateOrConnectWithoutPreventive_maintenance_schedulesInput = {
@@ -59603,7 +60044,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
@@ -59633,7 +60075,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
@@ -59717,7 +60160,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
@@ -59747,7 +60191,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
@@ -59862,7 +60307,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
@@ -59892,7 +60338,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
@@ -59994,7 +60441,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
@@ -60024,7 +60472,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
@@ -60205,7 +60654,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
@@ -60235,7 +60685,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_checked_by_user_idTousersInput
@@ -60317,7 +60768,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -60347,7 +60799,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -60464,7 +60917,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
@@ -60494,7 +60948,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_checked_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_checked_by_user_idTousersNestedInput
@@ -60588,7 +61043,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -60618,7 +61074,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -60725,7 +61182,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -60755,7 +61213,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -60894,7 +61353,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -60924,7 +61384,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -61073,7 +61534,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -61103,7 +61565,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -61254,7 +61717,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -61284,7 +61748,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -61487,7 +61952,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -61517,7 +61983,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -61640,7 +62107,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -61670,7 +62138,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -61899,7 +62368,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -61929,7 +62399,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -62074,7 +62545,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -62104,7 +62576,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -62389,7 +62862,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -62418,7 +62892,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_supervisor_user_idTousersInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedCreateNestedManyWithoutUsers_maintenance_requests_user_approved_by_idTousersInput
     notifications?: notificationsUncheckedCreateNestedManyWithoutUsersInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedCreateNestedManyWithoutUsers_request_disposal_details_approved_by_user_idTousersInput
@@ -63004,30 +63479,73 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type preventive_maintenance_logsCreateWithoutUsersInput = {
+  export type preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
     maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
     preventive_maintenance_schedules: preventive_maintenance_schedulesCreateNestedOneWithoutPreventive_maintenance_logsInput
   }
 
-  export type preventive_maintenance_logsUncheckedCreateWithoutUsersInput = {
+  export type preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     log_id?: number
     schedule_id: number
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
     linked_request_id?: number | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
-  export type preventive_maintenance_logsCreateOrConnectWithoutUsersInput = {
+  export type preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     where: preventive_maintenance_logsWhereUniqueInput
-    create: XOR<preventive_maintenance_logsCreateWithoutUsersInput, preventive_maintenance_logsUncheckedCreateWithoutUsersInput>
+    create: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput>
   }
 
-  export type preventive_maintenance_logsCreateManyUsersInputEnvelope = {
-    data: preventive_maintenance_logsCreateManyUsersInput | preventive_maintenance_logsCreateManyUsersInput[]
+  export type preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInputEnvelope = {
+    data: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInput | preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    performed_date?: Date | string
+    notes?: string | null
+    next_scheduled_date?: Date | string | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
+    maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
+    users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
+    preventive_maintenance_schedules: preventive_maintenance_schedulesCreateNestedOneWithoutPreventive_maintenance_logsInput
+  }
+
+  export type preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    log_id?: number
+    schedule_id: number
+    performed_by_user_id: number
+    performed_date?: Date | string
+    notes?: string | null
+    next_scheduled_date?: Date | string | null
+    linked_request_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
+  }
+
+  export type preventive_maintenance_logsCreateOrConnectWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    where: preventive_maintenance_logsWhereUniqueInput
+    create: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput>
+  }
+
+  export type preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInputEnvelope = {
+    data: preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInput | preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInput[]
     skipDuplicates?: boolean
   }
 
@@ -63512,20 +64030,36 @@ export namespace Prisma {
     data: XOR<notificationsUpdateManyMutationInput, notificationsUncheckedUpdateManyWithoutUsersInput>
   }
 
-  export type preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsersInput = {
+  export type preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     where: preventive_maintenance_logsWhereUniqueInput
-    update: XOR<preventive_maintenance_logsUpdateWithoutUsersInput, preventive_maintenance_logsUncheckedUpdateWithoutUsersInput>
-    create: XOR<preventive_maintenance_logsCreateWithoutUsersInput, preventive_maintenance_logsUncheckedCreateWithoutUsersInput>
+    update: XOR<preventive_maintenance_logsUpdateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedUpdateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput>
+    create: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput>
   }
 
-  export type preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsersInput = {
+  export type preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     where: preventive_maintenance_logsWhereUniqueInput
-    data: XOR<preventive_maintenance_logsUpdateWithoutUsersInput, preventive_maintenance_logsUncheckedUpdateWithoutUsersInput>
+    data: XOR<preventive_maintenance_logsUpdateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput, preventive_maintenance_logsUncheckedUpdateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput>
   }
 
-  export type preventive_maintenance_logsUpdateManyWithWhereWithoutUsersInput = {
+  export type preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     where: preventive_maintenance_logsScalarWhereInput
-    data: XOR<preventive_maintenance_logsUpdateManyMutationInput, preventive_maintenance_logsUncheckedUpdateManyWithoutUsersInput>
+    data: XOR<preventive_maintenance_logsUpdateManyMutationInput, preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput>
+  }
+
+  export type preventive_maintenance_logsUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    where: preventive_maintenance_logsWhereUniqueInput
+    update: XOR<preventive_maintenance_logsUpdateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedUpdateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput>
+    create: XOR<preventive_maintenance_logsCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedCreateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput>
+  }
+
+  export type preventive_maintenance_logsUpdateWithWhereUniqueWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    where: preventive_maintenance_logsWhereUniqueInput
+    data: XOR<preventive_maintenance_logsUpdateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput, preventive_maintenance_logsUncheckedUpdateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput>
+  }
+
+  export type preventive_maintenance_logsUpdateManyWithWhereWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    where: preventive_maintenance_logsScalarWhereInput
+    data: XOR<preventive_maintenance_logsUpdateManyMutationInput, preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput>
   }
 
   export type preventive_maintenance_schedulesUpsertWithWhereUniqueWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput = {
@@ -65238,7 +65772,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -65267,7 +65802,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -65353,6 +65889,10 @@ export namespace Prisma {
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
   export type request_disposal_detailsCreateManyMaintenance_requestsInput = {
@@ -65453,7 +65993,11 @@ export namespace Prisma {
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    users?: usersUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersUpdateOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput
   }
 
@@ -65464,6 +66008,10 @@ export namespace Prisma {
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type preventive_maintenance_logsUncheckedUpdateManyWithoutMaintenance_requestsInput = {
@@ -65473,6 +66021,10 @@ export namespace Prisma {
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type request_disposal_detailsUpdateWithoutMaintenance_requestsInput = {
@@ -65734,14 +66286,22 @@ export namespace Prisma {
     notes?: string | null
     next_scheduled_date?: Date | string | null
     linked_request_id?: number | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
   export type preventive_maintenance_logsUpdateWithoutPreventive_maintenance_schedulesInput = {
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
-    users?: usersUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersUpdateOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
   }
 
   export type preventive_maintenance_logsUncheckedUpdateWithoutPreventive_maintenance_schedulesInput = {
@@ -65751,6 +66311,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type preventive_maintenance_logsUncheckedUpdateManyWithoutPreventive_maintenance_schedulesInput = {
@@ -65760,6 +66324,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type maintenance_requestsCreateManyPriority_levelsInput = {
@@ -66108,7 +66676,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -66137,7 +66706,8 @@ export namespace Prisma {
     maintenance_requests_maintenance_requests_supervisor_user_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_supervisor_user_idTousersNestedInput
     maintenance_requests_maintenance_requests_user_approved_by_idTousers?: maintenance_requestsUncheckedUpdateManyWithoutUsers_maintenance_requests_user_approved_by_idTousersNestedInput
     notifications?: notificationsUncheckedUpdateManyWithoutUsersNestedInput
-    preventive_maintenance_logs?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousers?: preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_assigned_technician_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersNestedInput
     preventive_maintenance_schedules_preventive_maintenance_schedules_requester_user_idTousers?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutUsers_preventive_maintenance_schedules_requester_user_idTousersNestedInput
     request_disposal_details_request_disposal_details_approved_by_user_idTousers?: request_disposal_detailsUncheckedUpdateManyWithoutUsers_request_disposal_details_approved_by_user_idTousersNestedInput
@@ -66354,13 +66924,30 @@ export namespace Prisma {
     created_at?: Date | string | null
   }
 
-  export type preventive_maintenance_logsCreateManyUsersInput = {
+  export type preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     log_id?: number
     schedule_id: number
     performed_date?: Date | string
     notes?: string | null
     next_scheduled_date?: Date | string | null
     linked_request_id?: number | null
+    supervisor_user_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
+  }
+
+  export type preventive_maintenance_logsCreateManyUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    log_id?: number
+    schedule_id: number
+    performed_by_user_id: number
+    performed_date?: Date | string
+    notes?: string | null
+    next_scheduled_date?: Date | string | null
+    linked_request_id?: number | null
+    supervisor_approved_at?: Date | string | null
+    supervisor_notes?: string | null
+    status?: string | null
   }
 
   export type preventive_maintenance_schedulesCreateManyUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput = {
@@ -67050,30 +67637,80 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type preventive_maintenance_logsUpdateWithoutUsersInput = {
+  export type preventive_maintenance_logsUpdateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
+    users_preventive_maintenance_logs_supervisor_user_idTousers?: usersUpdateOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput
   }
 
-  export type preventive_maintenance_logsUncheckedUpdateWithoutUsersInput = {
+  export type preventive_maintenance_logsUncheckedUpdateWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     log_id?: IntFieldUpdateOperationsInput | number
     schedule_id?: IntFieldUpdateOperationsInput | number
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type preventive_maintenance_logsUncheckedUpdateManyWithoutUsersInput = {
+  export type preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_performed_by_user_idTousersInput = {
     log_id?: IntFieldUpdateOperationsInput | number
     schedule_id?: IntFieldUpdateOperationsInput | number
     performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type preventive_maintenance_logsUpdateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
+    users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
+    preventive_maintenance_schedules?: preventive_maintenance_schedulesUpdateOneRequiredWithoutPreventive_maintenance_logsNestedInput
+  }
+
+  export type preventive_maintenance_logsUncheckedUpdateWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    log_id?: IntFieldUpdateOperationsInput | number
+    schedule_id?: IntFieldUpdateOperationsInput | number
+    performed_by_user_id?: IntFieldUpdateOperationsInput | number
+    performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type preventive_maintenance_logsUncheckedUpdateManyWithoutUsers_preventive_maintenance_logs_supervisor_user_idTousersInput = {
+    log_id?: IntFieldUpdateOperationsInput | number
+    schedule_id?: IntFieldUpdateOperationsInput | number
+    performed_by_user_id?: IntFieldUpdateOperationsInput | number
+    performed_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
+    supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type preventive_maintenance_schedulesUpdateWithoutUsers_preventive_maintenance_schedules_assigned_technician_idTousersInput = {

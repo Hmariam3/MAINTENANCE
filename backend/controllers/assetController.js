@@ -3,13 +3,9 @@ const prisma = require('../db');
 exports.getAssets = async (req, res) => {
   try {
     const assets = await prisma.assets.findMany({
-      select: {
-        asset_id: true,
-        asset_number: true,
-        tag_number: true,
-        brand: true,
-        model: true,
-        current_status: true
+      include: {
+        branches: { select: { branch_name: true } },
+        asset_categories: { select: { category_name: true } }
       },
       orderBy: { created_at: 'desc' },
       take: 100
