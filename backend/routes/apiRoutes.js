@@ -1,15 +1,15 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 const dashboardController = require('../controllers/dashboardController');
-const assetController     = require('../controllers/assetController');
-const requestController   = require('../controllers/requestController');
-const lookupController    = require('../controllers/lookupController');
-const authController      = require('../controllers/authController');
-const userController      = require('../controllers/userController');
-const authMiddleware      = require('../middleware/authMiddleware');
-const requireRole         = require('../middleware/roleMiddleware');
-const { ROLES }           = require('../constants/roles');
+const assetController = require('../controllers/assetController');
+const requestController = require('../controllers/requestController');
+const lookupController = require('../controllers/lookupController');
+const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
+const authMiddleware = require('../middleware/authMiddleware');
+const requireRole = require('../middleware/roleMiddleware');
+const { ROLES } = require('../constants/roles');
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 router.post('/login', authController.login);
@@ -17,16 +17,16 @@ router.post('/login', authController.login);
 // ─── All routes below require a valid JWT ─────────────────────────────────────
 router.use(authMiddleware);
 
-router.get('/lookups',   lookupController.getLookups);
+router.get('/lookups', lookupController.getLookups);
 router.get('/dashboard', dashboardController.getDashboardMetrics);
 
 // Assets
-router.get('/assets',  assetController.getAssets);
+router.get('/assets', assetController.getAssets);
 router.post('/assets', assetController.createAsset);
 
 // ─── Maintenance Requests ─────────────────────────────────────────────────────
-router.get('/requests',     requestController.getRequests);
-router.post('/requests',    requestController.createRequest);
+router.get('/requests', requestController.getRequests);
+router.post('/requests', requestController.createRequest);
 router.get('/requests/:id', requestController.getRequestById);
 
 // Approval (Supervisor / Manager / Director)
@@ -39,7 +39,7 @@ router.patch(
 // Approve Closure (Supervisor / Manager / Director)
 router.patch(
   '/requests/:id/close',
-  requireRole(ROLES.SUPERVISOR, ROLES.MANAGER, ROLES.DIRECTOR),
+  requireRole(ROLES.SUPERVISOR),
   requestController.approveClosure
 );
 
@@ -83,7 +83,7 @@ router.patch(
 
 // ─── Users ────────────────────────────────────────────────────────────────────
 router.get('/users/ad-search', userController.searchAdUser);
-router.get('/users',  userController.getUsers);
+router.get('/users', userController.getUsers);
 router.post('/users', userController.createUser);
 router.patch('/users/:id', userController.updateUser);
 

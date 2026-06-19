@@ -7,12 +7,12 @@ import { Plus, Clock, CheckCircle, AlertCircle, Wrench } from 'lucide-react';
 const ROLES = { REQUESTER: 1, SUPERVISOR: 2, HELPDESK: 3, TECHNICIAN: 4, MANAGER: 5, DIRECTOR: 8 };
 
 const STATUS_CONFIG = {
-  'Open':        { color: '#eab308', bg: 'rgba(234,179,8,0.12)',   icon: '📝' },
-  'Assigned':    { color: '#3b82f6', bg: 'rgba(59,130,246,0.12)',  icon: '👷' },
-  'In Progress': { color: '#a855f7', bg: 'rgba(168,85,247,0.12)',  icon: '🔧' },
-  'On Hold':     { color: '#f97316', bg: 'rgba(249,115,22,0.12)',  icon: '⏸' },
-  'Completed':   { color: '#22c55e', bg: 'rgba(34,197,94,0.12)',   icon: '✅' },
-  'Disposal':    { color: '#ef4444', bg: 'rgba(239,68,68,0.12)',   icon: '🗑️' },
+  'Open': { color: '#eab308', bg: 'rgba(234,179,8,0.12)', icon: '📝' },
+  'Assigned': { color: '#3b82f6', bg: 'rgba(59,130,246,0.12)', icon: '👷' },
+  'In Progress': { color: '#a855f7', bg: 'rgba(168,85,247,0.12)', icon: '🔧' },
+  'On Hold': { color: '#f97316', bg: 'rgba(249,115,22,0.12)', icon: '⏸' },
+  'Completed': { color: '#22c55e', bg: 'rgba(34,197,94,0.12)', icon: '✅' },
+  'Disposal': { color: '#ef4444', bg: 'rgba(239,68,68,0.12)', icon: '🗑️' },
 };
 
 const PRIORITY_COLORS = {
@@ -20,22 +20,22 @@ const PRIORITY_COLORS = {
 };
 
 const FILTER_TABS = {
-  all:              { label: 'All',                   roles: Object.values(ROLES) },
-  pending:          { label: '⏳ Pending Approval',    roles: [ROLES.SUPERVISOR, ROLES.MANAGER, ROLES.DIRECTOR] },
-  unassigned:       { label: '🔍 Ready to Assign',    roles: [ROLES.HELPDESK, ROLES.MANAGER, ROLES.DIRECTOR] },
-  mine:             { label: '👷 Assigned to Me',      roles: [ROLES.TECHNICIAN] },
-  in_progress:      { label: '🔧 In Progress',         roles: [ROLES.HELPDESK, ROLES.MANAGER, ROLES.DIRECTOR, ROLES.SUPERVISOR] },
-  awaiting_closure: { label: '🔒 Awaiting Closure',    roles: [ROLES.SUPERVISOR, ROLES.MANAGER, ROLES.DIRECTOR] },
-  completed:        { label: '✅ Completed',            roles: [ROLES.HELPDESK, ROLES.MANAGER, ROLES.DIRECTOR, ROLES.SUPERVISOR] },
+  all: { label: 'All', roles: Object.values(ROLES) },
+  pending: { label: '⏳ Pending Approval', roles: [ROLES.SUPERVISOR, ROLES.MANAGER, ROLES.DIRECTOR] },
+  unassigned: { label: '🔍 Ready to Assign', roles: [ROLES.HELPDESK, ROLES.MANAGER, ROLES.DIRECTOR] },
+  mine: { label: '👷 Assigned to Me', roles: [ROLES.TECHNICIAN] },
+  in_progress: { label: '🔧 In Progress', roles: [ROLES.HELPDESK, ROLES.MANAGER, ROLES.DIRECTOR, ROLES.SUPERVISOR] },
+  awaiting_closure: { label: '🔒 Awaiting Closure', roles: [ROLES.SUPERVISOR, ROLES.MANAGER, ROLES.DIRECTOR] },
+  completed: { label: '✅ Completed', roles: [ROLES.HELPDESK, ROLES.MANAGER, ROLES.DIRECTOR, ROLES.SUPERVISOR] },
 };
 
 const Requests = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
-  const [loading, setLoading]   = useState(true);
-  const [filter, setFilter]     = useState('all');
-  const [search, setSearch]     = useState('');
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('all');
+  const [search, setSearch] = useState('');
   const roleId = user?.role_id;
 
   useEffect(() => { fetchRequests(); }, []);
@@ -64,22 +64,22 @@ const Requests = () => {
       req.problem_description?.toLowerCase().includes(search.toLowerCase());
 
     let matchesFilter = true;
-    if (filter === 'pending')          matchesFilter = req.status_id === 1 && !req.supervisor_approved_at;
-    if (filter === 'unassigned')       matchesFilter = !!req.supervisor_approved_at && req.status_id === 1;
-    if (filter === 'mine')             matchesFilter = req.assigned_technician_id === user?.user_id;
-    if (filter === 'in_progress')      matchesFilter = req.status_id === 3;
+    if (filter === 'pending') matchesFilter = req.status_id === 1 && !req.supervisor_approved_at;
+    if (filter === 'unassigned') matchesFilter = !!req.supervisor_approved_at && req.status_id === 1;
+    if (filter === 'mine') matchesFilter = req.assigned_technician_id === user?.user_id;
+    if (filter === 'in_progress') matchesFilter = req.status_id === 3;
     if (filter === 'awaiting_closure') matchesFilter = req.status_id === 5 && !req.user_approved_closure_at;
-    if (filter === 'completed')        matchesFilter = req.status_id === 5 && !!req.user_approved_closure_at;
+    if (filter === 'completed') matchesFilter = req.status_id === 5 && !!req.user_approved_closure_at;
 
     return matchesSearch && matchesFilter;
   });
 
   // Summary counts for top cards
   const counts = {
-    total:    requests.length,
-    open:     requests.filter(r => r.status_id === 1).length,
+    total: requests.length,
+    open: requests.filter(r => r.status_id === 1).length,
     progress: requests.filter(r => r.status_id === 3).length,
-    done:     requests.filter(r => r.status_id === 5).length,
+    done: requests.filter(r => r.status_id === 5).length,
   };
 
   const canCreate = [ROLES.REQUESTER, ROLES.HELPDESK, ROLES.MANAGER, ROLES.DIRECTOR].includes(roleId);
@@ -113,10 +113,10 @@ const Requests = () => {
       {/* ── Summary tiles ─────────────────────────────────────────── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
         {[
-          { label: 'Total',       value: counts.total,    icon: <Wrench size={18} />,        color: 'var(--primary)' },
-          { label: 'Open',        value: counts.open,     icon: <AlertCircle size={18} />,   color: '#eab308' },
-          { label: 'In Progress', value: counts.progress, icon: <Clock size={18} />,         color: '#a855f7' },
-          { label: 'Completed',   value: counts.done,     icon: <CheckCircle size={18} />,   color: '#22c55e' },
+          { label: 'Total', value: counts.total, icon: <Wrench size={18} />, color: 'var(--primary)' },
+          { label: 'Open', value: counts.open, icon: <AlertCircle size={18} />, color: '#eab308' },
+          { label: 'In Progress', value: counts.progress, icon: <Clock size={18} />, color: '#a855f7' },
+          { label: 'Completed', value: counts.done, icon: <CheckCircle size={18} />, color: '#22c55e' },
         ].map(tile => (
           <div key={tile.label} style={{
             backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '10px',
@@ -182,7 +182,7 @@ const Requests = () => {
             const pc = PRIORITY_COLORS[req.priority_name] || 'var(--primary)';
             const needsApproval = req.status_id === 1 && !req.supervisor_approved_at;
             const readyToAssign = req.status_id === 1 && req.supervisor_approved_at;
-            const needsClosure  = req.status_id === 5 && !req.user_approved_closure_at;
+            const needsClosure = req.status_id === 5 && !req.user_approved_closure_at;
 
             return (
               <div
@@ -202,9 +202,11 @@ const Requests = () => {
                   <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
                     <span style={{
                       padding: '0.2rem 0.6rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: '600',
-                      backgroundColor: sc.bg, color: sc.color
+                      backgroundColor: req.user_approved_closure_at ? 'rgba(34,197,94,0.1)' : sc.bg, 
+                      color: req.user_approved_closure_at ? '#22c55e' : sc.color,
+                      border: req.user_approved_closure_at ? '1px solid #22c55e40' : 'none'
                     }}>
-                      {sc.icon} {req.status_name}
+                      {req.user_approved_closure_at ? '🔒 Closed' : `${sc.icon} ${req.status_name}`}
                     </span>
                     <span style={{
                       padding: '0.2rem 0.6rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: '600',

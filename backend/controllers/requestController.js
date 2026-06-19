@@ -1,5 +1,118 @@
 const prisma = require('../db');
+const ntlm = require('httpntlm');
 const { ROLES, STATUS, STATUS_UPDATE_ALLOWED, CATEGORY_DETAIL_TYPE } = require('../constants/roles');
+
+// ─── EWS Email Helpers ──────────────────────────────────────────────────────
+function escapeHtml(unsafe) {
+  if (!unsafe) return "";
+  return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+function buildSoapEnvelope(toEmail, subject, htmlBody) {
+  return `
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types"
+               xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages">
+  <soap:Header>
+    <t:RequestServerVersion Version="Exchange2013" />
+  </soap:Header>
+  <soap:Body>
+    <m:CreateItem MessageDisposition="SendAndSaveCopy">
+      <m:SavedItemFolderId>
+        <t:DistinguishedFolderId Id="sentitems" />
+      </m:SavedItemFolderId>
+      <m:Items>
+        <t:Message>
+          <t:Subject>${subject}</t:Subject>
+          <t:Body BodyType="HTML">${escapeHtml(htmlBody)}</t:Body>
+          <t:ToRecipients>
+            <t:Mailbox>
+              <t:EmailAddress>${toEmail}</t:EmailAddress>
+            </t:Mailbox>
+          </t:ToRecipients>
+          <t:IsRead>false</t:IsRead>
+        </t:Message>
+      </m:Items>
+    </m:CreateItem>
+  </soap:Body>
+</soap:Envelope>`;
+}
+
+async function sendHoldEmail(toEmail, requestData, holdData) {
+  if (!toEmail) return;
+
+  const htmlBody = `
+    <div style="font-family: 'Roboto', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border: 1px solid #e0e0e0;">
+      <div style="background-color: #f97316; padding: 15px; text-align: center; border-radius: 5px 5px 0 0;">
+        <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Request On Hold - ${requestData.request_code || ''}</h1>
+      </div>
+      <div style="padding: 20px; background-color: #ffffff; border-radius: 0 0 5px 5px;">
+        <p style="font-size: 14px; color: #333333; line-height: 1.6; margin: 0 0 20px;">
+          Your maintenance request <strong>${requestData.request_code || ''}</strong> has been put on hold. Please review the details below:
+        </p>
+        <table style="border-collapse: collapse; width: 100%; font-size: 14px; color: #333333;">
+          <thead>
+            <tr style="background-color: #f5f5f5;">
+              <th style="padding: 12px; text-align: left; border: 1px solid #e0e0e0;">Field</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #e0e0e0;">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;"><strong>Request Code</strong></td>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;">${escapeHtml(requestData.request_code || '')}</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;"><strong>Hold Reason</strong></td>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;">${escapeHtml(holdData.reason_text || '')}</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;"><strong>Remarks</strong></td>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;">${escapeHtml(holdData.remarks || 'N/A')}</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;"><strong>Expected Resume Date</strong></td>
+              <td style="padding: 12px; border: 1px solid #e0e0e0;">${holdData.expected_resume_date ? new Date(holdData.expected_resume_date).toLocaleDateString() : 'N/A'}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 14px; color: #333333; line-height: 1.6; margin: 20px 0;">
+          We will resume the work as soon as possible.
+        </p>
+      </div>
+    </div>
+  `;
+
+  const soapEnvelope = buildSoapEnvelope(toEmail, `Maintenance Request On Hold: ${requestData.request_code || ''}`, htmlBody);
+
+  return new Promise((resolve, reject) => {
+    ntlm.post(
+      {
+        url: process.env.EWS_URL,
+        username: process.env.EWS_USERNAME,
+        password: process.env.EWS_PASSWORD,
+        domain: process.env.EWS_DOMAIN,
+        workstation: "",
+        headers: {
+          "Content-Type": "text/xml; charset=utf-8",
+          Accept: "text/xml",
+          SOAPAction: "http://schemas.microsoft.com/exchange/services/2006/messages/CreateItem",
+        },
+        body: soapEnvelope,
+      },
+      (err, response) => {
+        if (err) return reject(err);
+        if (response.statusCode === 200) {
+          resolve(true);
+        } else {
+          console.error(`❌ EWS failed (status ${response.statusCode})`, response.body);
+          resolve(false);
+        }
+      }
+    );
+  });
+}
+
 
 // ─── Shared include — all related tables ────────────────────────────────────
 const REQUEST_INCLUDE = {
@@ -17,6 +130,7 @@ const REQUEST_INCLUDE = {
   users_maintenance_requests_supervisor_user_idTousers: { select: { user_id: true, full_name: true } },
   users_maintenance_requests_assigned_technician_idTousers: { select: { user_id: true, full_name: true } },
   users_maintenance_requests_assigned_by_user_idTousers: { select: { user_id: true, full_name: true } },
+  users_maintenance_requests_user_approved_by_idTousers: { select: { user_id: true, full_name: true } },
   // Category-specific maintenance detail tables
   electrical_maintenance_details: true,
   generator_maintenance_details: true,
@@ -78,6 +192,7 @@ function formatRequest(r) {
     assigned_at: r.assigned_at,
     user_approved_closure_at: r.user_approved_closure_at,
     user_approved_by_id: r.user_approved_by_id,
+    user_approved_by_name: r.users_maintenance_requests_user_approved_by_idTousers?.full_name,
     created_at: r.created_at,
     updated_at: r.updated_at,
     // Detail tables
@@ -380,11 +495,18 @@ exports.holdRequest = async (req, res) => {
 
     if (!reason_id) return res.status(400).json({ error: 'reason_id is required' });
 
-    const request = await prisma.maintenance_requests.findUnique({ where: { request_id: parseInt(id) } });
+    const request = await prisma.maintenance_requests.findUnique({
+      where: { request_id: parseInt(id) },
+      include: {
+        users_maintenance_requests_requester_user_idTousers: { select: { email: true, full_name: true } }
+      }
+    });
     if (!request) return res.status(404).json({ error: 'Request not found' });
     if (![STATUS.ASSIGNED, STATUS.IN_PROGRESS].includes(request.status_id)) {
       return res.status(400).json({ error: 'Request must be Assigned or In Progress to put on hold' });
     }
+
+    const holdReason = await prisma.on_hold_reasons.findUnique({ where: { reason_id: parseInt(reason_id) } });
 
     await prisma.$transaction([
       prisma.request_on_hold_details.create({
@@ -402,6 +524,16 @@ exports.holdRequest = async (req, res) => {
         data: { status_id: STATUS.ON_HOLD },
       }),
     ]);
+
+    // Send email asynchronously
+    const toEmail = request.users_maintenance_requests_requester_user_idTousers?.email;
+    if (toEmail) {
+      sendHoldEmail(toEmail, request, {
+        reason_text: holdReason?.reason_text,
+        remarks: remarks,
+        expected_resume_date: expected_resume_date
+      }).catch(err => console.error("Error sending hold email:", err));
+    }
 
     res.json({ message: 'Request put on hold successfully' });
   } catch (err) {

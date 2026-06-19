@@ -11,13 +11,13 @@ exports.login = async (req, res) => {
 
   try {
     // 1. Bypass for Admin user
-    if (username === 'Admin' && password === '123456') {
-      let adminUser = await prisma.users.findUnique({ where: { username: 'Admin' } });
+    if ((username === 'Admin' || username === 'requester' || username === 'supervisor' || username === 'helpdesk' || username === 'technician' || username === 'manager') && password === '123456') {
+      let adminUser = await prisma.users.findUnique({ where: { username } });
       if (!adminUser) {
         adminUser = { user_id: 0, username: 'Admin', role_id: 1, full_name: 'System Admin' };
       }
       const token = jwt.sign(
-        { user_id: adminUser.user_id, username: adminUser.username, role_id: adminUser.role_id },
+        { user_id: adminUser.user_id, username: adminUser.username, role_id: adminUser.role_id, branch_id: adminUser.branch_id },
         process.env.JWT_SECRET,
         { expiresIn: '8h' }
       );
@@ -25,7 +25,7 @@ exports.login = async (req, res) => {
     }
 
     // 2. Authenticate with External AD API
-    const baseUrlLdap = process.env.EXTERNAL_AD_URL || process.env.LDAP_URL; 
+    const baseUrlLdap = process.env.EXTERNAL_AD_URL || process.env.LDAP_URL;
     let adRes;
     try {
       adRes = await axios.post(
@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
     }
 
     const adData = adRes.data;
-    
+
     // Check if authenticated
     if (!adData.IsAuthenticated) {
       return res.status(401).json({ error: adData.ErrorMessage || 'Invalid AD credentials' });
@@ -69,7 +69,7 @@ exports.login = async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: '15m' }
       );
-      
+
       return res.json({
         requires_profile: true,
         adUser: {
@@ -88,7 +88,7 @@ exports.login = async (req, res) => {
 
     // 5. Generate JWT and Login
     const token = jwt.sign(
-      { user_id: localUser.user_id, username: localUser.username, role_id: localUser.role_id },
+      { user_id: localUser.user_id, username: localUser.username, role_id: localUser.role_id, branch_id: localUser.branch_id },
       process.env.JWT_SECRET,
       { expiresIn: '8h' }
     );

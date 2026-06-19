@@ -21,6 +21,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "httpntlm": "^1.8.13",
     "jsonwebtoken": "^9.0.3",
     "ldap-authentication": "^4.0.4",
     "ldapjs": "^3.0.7",

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axios';
-import { Package, Search, Plus, Eye, X, Monitor, Calendar, MapPin, Hash, ShieldCheck, HardDrive } from 'lucide-react';
+import { Package, Search, Plus, Eye, X, Monitor, Calendar, MapPin, Hash, ShieldCheck, HardDrive, Download } from 'lucide-react';
+import * as XLSX from 'xlsx';
 
 const Assets = () => {
   const [assets, setAssets] = useState([]);
@@ -41,6 +42,85 @@ const Assets = () => {
     setSelectedAsset(null);
   };
 
+  const downloadTemplate = async () => {
+    try {
+      // Fetch data for lookup sheets
+      const lookupsRes = await api.get('/lookups');
+      const { categories, branches, sub_processess } = lookupsRes.data;
+
+      // Create workbook
+      const wb = XLSX.utils.book_new();
+
+      // 1. Assets Sheet
+      const assetHeaders = [
+        "Asset Number (Required)",
+        "Tag Number (Required)",
+        "Serial Number",
+        "Company Name",
+        "Description",
+        "Category ID (Required)",
+        "Brand",
+        "Model",
+        "Cost Center Number (Branch Code)",
+        "Branch ID",
+        "District Name (Subprocess)",
+        "IP Address",
+        "Acquisition Year (YYYY)",
+        "Capitalized On (MM/DD/YYYY)",
+        "Current Status"
+      ];
+      
+      const spMap = {};
+      sub_processess.forEach(sp => {
+        spMap[sp.id] = sp.process_name;
+      });
+
+      const assetSample = [
+        "AST-001",
+        "TAG-9901",
+        "SN-1234567",
+        "ABC Corp",
+        "Dell XPS 15 Laptop",
+        categories[0]?.category_id || 1,
+        "Dell",
+        "XPS 15",
+        branches[0]?.branch_code || "ET0010002",
+        branches[0]?.branch_id || 1,
+        spMap[branches[0]?.district] || branches[0]?.district || "101",
+        "192.168.1.5",
+        "2023",
+        "01/15/2023",
+        "Active"
+      ];
+      const wsAssets = XLSX.utils.aoa_to_sheet([assetHeaders, assetSample]);
+      XLSX.utils.book_append_sheet(wb, wsAssets, "Assets");
+
+      // 2. Categories Sheet
+      const catHeaders = ["Category ID", "Category Name", "Is Active"];
+      const catRows = categories.map(c => [c.category_id, c.category_name, c.is_active]);
+      const wsCategories = XLSX.utils.aoa_to_sheet([catHeaders, ...catRows]);
+      XLSX.utils.book_append_sheet(wb, wsCategories, "Categories");
+
+      // 3. Branches Sheet
+      const branchHeaders = ["Branch ID", "Branch Name", "Cost Center (Branch Code)", "District Name"];
+      const branchRows = branches.map(b => [
+        b.branch_id,
+        b.branch_name,
+        b.branch_code || "",
+        spMap[b.district] || b.district || ""
+      ]);
+      const wsBranches = XLSX.utils.aoa_to_sheet([branchHeaders, ...branchRows]);
+      XLSX.utils.book_append_sheet(wb, wsBranches, "Branches");
+
+      // Download
+      XLSX.writeFile(wb, "Asset_Master_Data_Template.xlsx");
+
+    } catch (err) {
+      console.error("Failed to generate Excel template:", err);
+      alert("Failed to generate template. Please check your network connection.");
+    }
+  };
+
   return (
     <div style={{ padding: '0' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
@@ -50,19 +130,34 @@ const Assets = () => {
             Manage and view details for all registered hardware and equipment.
           </p>
         </div>
-        <Link 
-          to="/assets/new" 
-          style={{ 
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-            padding: '0.65rem 1.25rem', backgroundColor: 'var(--primary)', 
-            color: 'white', textDecoration: 'none', borderRadius: '8px', 
-            fontWeight: '600', fontSize: '0.9rem', transition: 'background-color 0.2s' 
-          }}
-          onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--primary-dark)'}
-          onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--primary)'}
-        >
-          <Plus size={18} /> Register Asset
-        </Link>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <button 
+            onClick={downloadTemplate}
+            style={{ 
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.65rem 1.25rem', backgroundColor: 'var(--surface)', 
+              color: 'var(--text-main)', border: '1px solid var(--border)', borderRadius: '8px', 
+              fontWeight: '600', fontSize: '0.9rem', cursor: 'pointer', transition: 'all 0.2s' 
+            }}
+            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--surface-light)'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--surface)'}
+          >
+            <Download size={18} /> Download Template
+          </button>
+          <Link 
+            to="/assets/new" 
+            style={{ 
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.65rem 1.25rem', backgroundColor: 'var(--primary)', 
+              color: 'white', textDecoration: 'none', borderRadius: '8px', 
+              fontWeight: '600', fontSize: '0.9rem', transition: 'background-color 0.2s' 
+            }}
+            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--primary-dark)'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--primary)'}
+          >
+            <Plus size={18} /> Register Asset
+          </Link>
+        </div>
       </div>
 
       <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', position: 'relative', maxWidth: '400px' }}>
