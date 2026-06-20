@@ -3,10 +3,14 @@ import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import { Check, X, ClipboardList, User } from 'lucide-react';
 
+// ─── Constants ────────────────────────────────────────────────────────────────
+const ROLES = { REQUESTER: 1, SUPERVISOR: 2, HELPDESK: 3, TECHNICIAN: 4, MANAGER: 5, DIRECTOR: 8 };
+ 
 const PMApprovals = () => {
   const { user } = useContext(AuthContext);
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const roleId = user?.role_id;
   
   // Modal states
   const [showApprovalModal, setShowApprovalModal] = useState(false);
@@ -104,7 +108,7 @@ const PMApprovals = () => {
                   </div>
                 </div>
 
-                {isPending && (
+                {isPending && roleId === ROLES.SUPERVISOR &&  (
                   <button
                     onClick={() => handleAction(log)}
                     style={{ padding: '0.6rem 1.25rem', borderRadius: '8px', border: 'none', backgroundColor: 'var(--primary)', color: 'white', fontWeight: '600', cursor: 'pointer' }}
