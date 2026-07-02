@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axios';
 import { Package, Search, Plus, Eye, X, Monitor, Calendar, MapPin, Hash, ShieldCheck, HardDrive, Download, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx-js-style';
 
 const Assets = () => {
   const [assets, setAssets] = useState([]);
@@ -141,6 +141,57 @@ const Assets = () => {
       ]);
 
       const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+
+      // 1. Set Column Widths (Line separation / readable columns)
+      const colWidths = headers.map((header, i) => {
+        let maxLen = header.length;
+        rows.forEach(row => {
+          const val = row[i];
+          if (val) {
+            const len = val.toString().length;
+            if (len > maxLen) maxLen = len;
+          }
+        });
+        return { wch: maxLen + 3 }; // Add padding
+      });
+      ws['!cols'] = colWidths;
+
+      // 2. Apply Styles: Bold Headers and Cell Borders
+      const range = XLSX.utils.decode_range(ws['!ref']);
+      for (let R = range.s.r; R <= range.e.r; ++R) {
+        for (let C = range.s.c; C <= range.e.c; ++C) {
+          const cellAddress = { c: C, r: R };
+          const cellRef = XLSX.utils.encode_cell(cellAddress);
+          
+          if (!ws[cellRef]) ws[cellRef] = { t: 's', v: '' }; // Initialize empty cells
+
+          // Default border for all cells
+          const borderStyle = {
+            top: { style: "thin", color: { rgb: "D1D5DB" } },
+            bottom: { style: "thin", color: { rgb: "D1D5DB" } },
+            left: { style: "thin", color: { rgb: "D1D5DB" } },
+            right: { style: "thin", color: { rgb: "D1D5DB" } }
+          };
+
+          if (R === 0) {
+            // Header Row: Bold, centered, background color
+            ws[cellRef].s = {
+              font: { bold: true, color: { rgb: "FFFFFF" } },
+              fill: { fgColor: { rgb: "4F46E5" } }, // Indigo background
+              alignment: { horizontal: "center", vertical: "center" },
+              border: borderStyle
+            };
+          } else {
+            // Data Rows: Normal font, bordered, top vertical alignment
+            ws[cellRef].s = {
+              font: { color: { rgb: "111827" } },
+              alignment: { vertical: "top" },
+              border: borderStyle
+            };
+          }
+        }
+      }
+
       XLSX.utils.book_append_sheet(wb, ws, "Assets Data");
 
       XLSX.writeFile(wb, "Assets_Export.xlsx");
