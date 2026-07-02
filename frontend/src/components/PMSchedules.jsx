@@ -18,18 +18,19 @@ const PMSchedules = () => {
   const { user } = useContext(AuthContext);
   const [schedules, setSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Lookups for the form
   const [lookups, setLookups] = useState({ branches: [], assets: [], categories: [] });
-  
+
   // Modal states
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showLogModal, setShowLogModal] = useState(false);
   const [selectedScheduleId, setSelectedScheduleId] = useState(null);
-  
+
   const [formData, setFormData] = useState({
     schedule_name: '', branch_id: '', category_id: '', asset_id: '', frequency_type: 'Monthly', next_due_date: ''
   });
+  const [branchSearch, setBranchSearch] = useState('');
   const [logData, setLogData] = useState({
     notes: '', next_scheduled_date: ''
   });
@@ -69,6 +70,7 @@ const PMSchedules = () => {
       await api.post('/pm/schedules', formData);
       setShowCreateModal(false);
       setFormData({ schedule_name: '', branch_id: '', category_id: '', asset_id: '', frequency_type: 'Monthly', next_due_date: '' });
+      setBranchSearch('');
       fetchSchedules();
     } catch (err) {
       alert(err.response?.data?.error || 'Failed to create schedule');
@@ -174,12 +176,25 @@ const PMSchedules = () => {
               </div>
               <div style={fieldStyle}>
                 <label style={labelStyle}>Branch *</label>
-                <select required style={inputStyle} value={formData.branch_id} onChange={e => {
-                  setFormData({ ...formData, branch_id: e.target.value, asset_id: '' });
-                }}>
-                  <option value="">— Select Branch —</option>
-                  {lookups.branches.map(b => <option key={b.branch_id} value={b.branch_id}>{b.branch_name}</option>)}
-                </select>
+                <input
+                  required
+                  type="text"
+                  list="pm-branch-list"
+                  placeholder="Type to search branch..."
+                  style={{ ...inputStyle, outline: 'none' }}
+                  value={branchSearch}
+                  onChange={e => {
+                    const val = e.target.value;
+                    setBranchSearch(val);
+                    const selectedBranch = lookups.branches.find(b => b.branch_name === val);
+                    setFormData({ ...formData, branch_id: selectedBranch ? selectedBranch.branch_id : '', asset_id: '' });
+                  }}
+                  onFocus={e => e.target.style.borderColor = 'var(--primary)'}
+                  onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                />
+                <datalist id="pm-branch-list">
+                  {lookups.branches.map(b => <option key={b.branch_id} value={b.branch_name} style={{ color: '#000', backgroundColor: '#fff' }} />)}
+                </datalist>
               </div>
               <div style={fieldStyle}>
                 <label style={labelStyle}>Asset * (Specific to selected branch)</label>
@@ -227,7 +242,7 @@ const PMSchedules = () => {
             <form onSubmit={handleLogWork} style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={fieldStyle}>
                 <label style={labelStyle}>Work Notes / Remarks *</label>
-                <textarea required rows={4} style={{...inputStyle, resize: 'vertical'}} value={logData.notes} onChange={e => setLogData({ ...logData, notes: e.target.value })} placeholder="Describe the work performed..." />
+                <textarea required rows={4} style={{ ...inputStyle, resize: 'vertical' }} value={logData.notes} onChange={e => setLogData({ ...logData, notes: e.target.value })} placeholder="Describe the work performed..." />
               </div>
               <div style={fieldStyle}>
                 <label style={labelStyle}>Next Scheduled Date (Optional)</label>

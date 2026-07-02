@@ -26,6 +26,7 @@
     "ldap-authentication": "^4.0.4",
     "ldapjs": "^3.0.7",
     "pg": "^8.21.0",
-    "prisma": "^7.8.0"
+    "prisma": "^7.8.0",
+    "xlsx": "^0.18.5"
   }
 }

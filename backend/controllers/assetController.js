@@ -2,15 +2,76 @@ const prisma = require('../db');
 
 exports.getAssets = async (req, res) => {
   try {
-    const assets = await prisma.assets.findMany({
+    const { 
+      page = 1, 
+      limit = 10, 
+      search = '', 
+      category = '', 
+      branch = '', 
+      cost_center = '',
+      export: isExport = false
+    } = req.query;
+
+    const pageNumber = parseInt(page);
+    const limitNumber = parseInt(limit);
+
+    // Build the dynamic 'where' clause
+    const whereClause = {};
+
+    if (search) {
+      whereClause.OR = [
+        { asset_number: { contains: search, mode: 'insensitive' } },
+        { tag_number: { contains: search, mode: 'insensitive' } },
+        { brand: { contains: search, mode: 'insensitive' } },
+        { model: { contains: search, mode: 'insensitive' } }
+      ];
+    }
+
+    if (category) {
+      whereClause.category_id = parseInt(category);
+    }
+
+    if (branch) {
+      whereClause.branch_id = parseInt(branch);
+    }
+
+    if (cost_center) {
+      whereClause.cost_center_number = { contains: cost_center, mode: 'insensitive' };
+    }
+
+    // Query configuration
+    const queryConfig = {
+      where: whereClause,
       include: {
-        branches: { select: { branch_name: true } },
+        branches: { select: { branch_name: true, branch_code: true } },
         asset_categories: { select: { category_name: true } }
       },
       orderBy: { created_at: 'desc' },
-      take: 100
-    });
-    res.json(assets);
+    };
+
+    if (isExport === 'true' || isExport === true) {
+      // If exporting, ignore skip/take to fetch all matching records
+      const assets = await prisma.assets.findMany(queryConfig);
+      return res.json({ data: assets });
+    } else {
+      // Standard paginated fetch
+      queryConfig.skip = (pageNumber - 1) * limitNumber;
+      queryConfig.take = limitNumber;
+
+      const [assets, total] = await Promise.all([
+        prisma.assets.findMany(queryConfig),
+        prisma.assets.count({ where: whereClause })
+      ]);
+
+      const totalPages = Math.ceil(total / limitNumber);
+
+      return res.json({
+        data: assets,
+        total,
+        page: pageNumber,
+        totalPages
+      });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });

@@ -23,6 +23,7 @@ const CreateAsset = () => {
     district: '',
     cost_center_number: ''
   });
+  const [branchSearch, setBranchSearch] = useState('');
 
   useEffect(() => {
     const fetchLookups = async () => {
@@ -42,6 +43,7 @@ const CreateAsset = () => {
 
     if (name === 'branch_id' && value) {
       const selectedBranch = lookups.branches.find(b => b.branch_id === parseInt(value));
+      console.log("Selected Branch : ", selectedBranch);
       if (selectedBranch) {
         let districtName = selectedBranch.district || '';
         if (selectedBranch.district && lookups.sub_processess) {
@@ -53,7 +55,7 @@ const CreateAsset = () => {
           districtName = processNames.join(', ');
         }
         newFormData.district = districtName;
-        newFormData.cost_center_number = selectedBranch.branch_code || '';
+        newFormData.cost_center_number = selectedBranch.cost_center || '';
       }
     } else if (name === 'branch_id' && !value) {
       newFormData.district = '';
@@ -62,6 +64,33 @@ const CreateAsset = () => {
 
     setFormData(newFormData);
   };
+
+  const handleBranchSearchChange = (e) => {
+    const val = e.target.value;
+    setBranchSearch(val);
+    const selectedBranch = lookups.branches.find(b => b.branch_name === val);
+
+    let newFormData = { ...formData, branch_id: selectedBranch ? selectedBranch.branch_id : '' };
+
+    if (selectedBranch) {
+      let districtName = selectedBranch.district || '';
+      if (selectedBranch.district && lookups.sub_processess) {
+        const districtIds = selectedBranch.district.split(',');
+        const processNames = districtIds.map(id => {
+          const sp = lookups.sub_processess.find(s => s.id === id.trim());
+          return sp ? sp.process_name : id;
+        });
+        districtName = processNames.join(', ');
+      }
+      newFormData.district = districtName;
+      newFormData.cost_center_number = selectedBranch.cost_center || '';
+    } else {
+      newFormData.district = '';
+      newFormData.cost_center_number = '';
+    }
+    setFormData(newFormData);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,7 +110,7 @@ const CreateAsset = () => {
     <div className="form-container" style={{ maxWidth: '600px', margin: '0 auto', backgroundColor: 'var(--surface)', padding: '2rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
       <h2 style={{ marginBottom: '1.5rem', color: 'var(--text-main)' }}>Register New Asset</h2>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        
+
         <div style={{ display: 'flex', gap: '1rem' }}>
           <div style={{ flex: 1 }}>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Asset Number *</label>
@@ -108,10 +137,19 @@ const CreateAsset = () => {
           </div>
           <div style={{ flex: 1 }}>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Branch</label>
-            <select name="branch_id" onChange={handleChange} style={{ width: '100%', padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)' }}>
-              <option value="">Select Branch</option>
-              {lookups.branches.map(b => <option key={b.branch_id} value={b.branch_id}>{b.branch_name}</option>)}
-            </select>
+            <input
+              type="text"
+              list="create-asset-branch-list"
+              value={branchSearch}
+              onChange={handleBranchSearchChange}
+              placeholder="Type to search branch..."
+              style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', border: '1px solid var(--border)', borderRadius: '8px', boxSizing: 'border-box', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }}
+              onFocus={e => e.target.style.borderColor = 'var(--primary)'}
+              onBlur={e => e.target.style.borderColor = 'var(--border)'}
+            />
+            <datalist id="create-asset-branch-list">
+              {lookups.branches.map(b => <option key={b.branch_id} value={b.branch_name} style={{ color: '#000', backgroundColor: '#fff' }} />)}
+            </datalist>
           </div>
         </div>
 
@@ -132,7 +170,7 @@ const CreateAsset = () => {
             <input type="text" name="district" value={formData.district} readOnly style={{ width: '100%', padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', opacity: 0.7 }} />
           </div>
           <div style={{ flex: 1 }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Cost Center (Branch Code)</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Cost Center</label>
             <input type="text" name="cost_center_number" value={formData.cost_center_number} readOnly style={{ width: '100%', padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', opacity: 0.7 }} />
           </div>
         </div>

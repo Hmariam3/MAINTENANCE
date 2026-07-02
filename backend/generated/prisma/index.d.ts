@@ -173,6 +173,11 @@ export type processess = $Result.DefaultSelection<Prisma.$processessPayload>
  * 
  */
 export type sub_processess = $Result.DefaultSelection<Prisma.$sub_processessPayload>
+/**
+ * Model cost_centers
+ * 
+ */
+export type cost_centers = $Result.DefaultSelection<Prisma.$cost_centersPayload>
 
 /**
  * Enums
@@ -703,6 +708,16 @@ export class PrismaClient<
     * ```
     */
   get sub_processess(): Prisma.sub_processessDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.cost_centers`: Exposes CRUD operations for the **cost_centers** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Cost_centers
+    * const cost_centers = await prisma.cost_centers.findMany()
+    * ```
+    */
+  get cost_centers(): Prisma.cost_centersDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1168,7 +1183,8 @@ export namespace Prisma {
     vendor_request_assignments: 'vendor_request_assignments',
     vendors: 'vendors',
     processess: 'processess',
-    sub_processess: 'sub_processess'
+    sub_processess: 'sub_processess',
+    cost_centers: 'cost_centers'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1184,7 +1200,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "asset_categories" | "asset_status_history" | "assets" | "audit_logs" | "branches" | "electrical_maintenance_details" | "escalation_rules" | "generator_maintenance_details" | "hardware_maintenance_details" | "maintenance_requests" | "notification_types" | "notifications" | "on_hold_reasons" | "preventive_maintenance_logs" | "preventive_maintenance_schedules" | "priority_levels" | "request_disposal_details" | "request_escalations" | "request_on_hold_details" | "request_resolution_details" | "request_sla_tracking" | "request_spare_parts_used" | "request_statuses" | "responsible_party_types" | "roles" | "spare_parts" | "users" | "vendor_contracts" | "vendor_request_assignments" | "vendors" | "processess" | "sub_processess"
+      modelProps: "asset_categories" | "asset_status_history" | "assets" | "audit_logs" | "branches" | "electrical_maintenance_details" | "escalation_rules" | "generator_maintenance_details" | "hardware_maintenance_details" | "maintenance_requests" | "notification_types" | "notifications" | "on_hold_reasons" | "preventive_maintenance_logs" | "preventive_maintenance_schedules" | "priority_levels" | "request_disposal_details" | "request_escalations" | "request_on_hold_details" | "request_resolution_details" | "request_sla_tracking" | "request_spare_parts_used" | "request_statuses" | "responsible_party_types" | "roles" | "spare_parts" | "users" | "vendor_contracts" | "vendor_request_assignments" | "vendors" | "processess" | "sub_processess" | "cost_centers"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3556,6 +3572,80 @@ export namespace Prisma {
           }
         }
       }
+      cost_centers: {
+        payload: Prisma.$cost_centersPayload<ExtArgs>
+        fields: Prisma.cost_centersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.cost_centersFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.cost_centersFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>
+          }
+          findFirst: {
+            args: Prisma.cost_centersFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.cost_centersFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>
+          }
+          findMany: {
+            args: Prisma.cost_centersFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>[]
+          }
+          create: {
+            args: Prisma.cost_centersCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>
+          }
+          createMany: {
+            args: Prisma.cost_centersCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.cost_centersCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>[]
+          }
+          delete: {
+            args: Prisma.cost_centersDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>
+          }
+          update: {
+            args: Prisma.cost_centersUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>
+          }
+          deleteMany: {
+            args: Prisma.cost_centersDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.cost_centersUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.cost_centersUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>[]
+          }
+          upsert: {
+            args: Prisma.cost_centersUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cost_centersPayload>
+          }
+          aggregate: {
+            args: Prisma.Cost_centersAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCost_centers>
+          }
+          groupBy: {
+            args: Prisma.cost_centersGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Cost_centersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.cost_centersCountArgs<ExtArgs>
+            result: $Utils.Optional<Cost_centersCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3696,6 +3786,7 @@ export namespace Prisma {
     vendors?: vendorsOmit
     processess?: processessOmit
     sub_processess?: sub_processessOmit
+    cost_centers?: cost_centersOmit
   }
 
   /* Types for Logging */
@@ -9635,6 +9726,7 @@ export namespace Prisma {
     created_at: Date | null
     district: string | null
     branch_code: string | null
+    cost_center: string | null
     is_active: boolean | null
   }
 
@@ -9645,6 +9737,7 @@ export namespace Prisma {
     created_at: Date | null
     district: string | null
     branch_code: string | null
+    cost_center: string | null
     is_active: boolean | null
   }
 
@@ -9655,6 +9748,7 @@ export namespace Prisma {
     created_at: number
     district: number
     branch_code: number
+    cost_center: number
     is_active: number
     _all: number
   }
@@ -9675,6 +9769,7 @@ export namespace Prisma {
     created_at?: true
     district?: true
     branch_code?: true
+    cost_center?: true
     is_active?: true
   }
 
@@ -9685,6 +9780,7 @@ export namespace Prisma {
     created_at?: true
     district?: true
     branch_code?: true
+    cost_center?: true
     is_active?: true
   }
 
@@ -9695,6 +9791,7 @@ export namespace Prisma {
     created_at?: true
     district?: true
     branch_code?: true
+    cost_center?: true
     is_active?: true
     _all?: true
   }
@@ -9792,6 +9889,7 @@ export namespace Prisma {
     created_at: Date | null
     district: string | null
     branch_code: string | null
+    cost_center: string | null
     is_active: boolean | null
     _count: BranchesCountAggregateOutputType | null
     _avg: BranchesAvgAggregateOutputType | null
@@ -9821,6 +9919,7 @@ export namespace Prisma {
     created_at?: boolean
     district?: boolean
     branch_code?: boolean
+    cost_center?: boolean
     is_active?: boolean
     assets?: boolean | branches$assetsArgs<ExtArgs>
     maintenance_requests?: boolean | branches$maintenance_requestsArgs<ExtArgs>
@@ -9836,6 +9935,7 @@ export namespace Prisma {
     created_at?: boolean
     district?: boolean
     branch_code?: boolean
+    cost_center?: boolean
     is_active?: boolean
   }, ExtArgs["result"]["branches"]>
 
@@ -9846,6 +9946,7 @@ export namespace Prisma {
     created_at?: boolean
     district?: boolean
     branch_code?: boolean
+    cost_center?: boolean
     is_active?: boolean
   }, ExtArgs["result"]["branches"]>
 
@@ -9856,10 +9957,11 @@ export namespace Prisma {
     created_at?: boolean
     district?: boolean
     branch_code?: boolean
+    cost_center?: boolean
     is_active?: boolean
   }
 
-  export type branchesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"branch_id" | "branch_name" | "updated_at" | "created_at" | "district" | "branch_code" | "is_active", ExtArgs["result"]["branches"]>
+  export type branchesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"branch_id" | "branch_name" | "updated_at" | "created_at" | "district" | "branch_code" | "cost_center" | "is_active", ExtArgs["result"]["branches"]>
   export type branchesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assets?: boolean | branches$assetsArgs<ExtArgs>
     maintenance_requests?: boolean | branches$maintenance_requestsArgs<ExtArgs>
@@ -9885,6 +9987,7 @@ export namespace Prisma {
       created_at: Date | null
       district: string | null
       branch_code: string | null
+      cost_center: string | null
       is_active: boolean | null
     }, ExtArgs["result"]["branches"]>
     composites: {}
@@ -10319,6 +10422,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"branches", 'DateTime'>
     readonly district: FieldRef<"branches", 'String'>
     readonly branch_code: FieldRef<"branches", 'String'>
+    readonly cost_center: FieldRef<"branches", 'String'>
     readonly is_active: FieldRef<"branches", 'Boolean'>
   }
     
@@ -43586,6 +43690,1066 @@ export namespace Prisma {
 
 
   /**
+   * Model cost_centers
+   */
+
+  export type AggregateCost_centers = {
+    _count: Cost_centersCountAggregateOutputType | null
+    _avg: Cost_centersAvgAggregateOutputType | null
+    _sum: Cost_centersSumAggregateOutputType | null
+    _min: Cost_centersMinAggregateOutputType | null
+    _max: Cost_centersMaxAggregateOutputType | null
+  }
+
+  export type Cost_centersAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type Cost_centersSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type Cost_centersMinAggregateOutputType = {
+    id: number | null
+    company_code: string | null
+    cost_center: string | null
+    branch: string | null
+    district: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Cost_centersMaxAggregateOutputType = {
+    id: number | null
+    company_code: string | null
+    cost_center: string | null
+    branch: string | null
+    district: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Cost_centersCountAggregateOutputType = {
+    id: number
+    company_code: number
+    cost_center: number
+    branch: number
+    district: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Cost_centersAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type Cost_centersSumAggregateInputType = {
+    id?: true
+  }
+
+  export type Cost_centersMinAggregateInputType = {
+    id?: true
+    company_code?: true
+    cost_center?: true
+    branch?: true
+    district?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Cost_centersMaxAggregateInputType = {
+    id?: true
+    company_code?: true
+    cost_center?: true
+    branch?: true
+    district?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Cost_centersCountAggregateInputType = {
+    id?: true
+    company_code?: true
+    cost_center?: true
+    branch?: true
+    district?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Cost_centersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which cost_centers to aggregate.
+     */
+    where?: cost_centersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cost_centers to fetch.
+     */
+    orderBy?: cost_centersOrderByWithRelationInput | cost_centersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: cost_centersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cost_centers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cost_centers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned cost_centers
+    **/
+    _count?: true | Cost_centersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Cost_centersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Cost_centersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Cost_centersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Cost_centersMaxAggregateInputType
+  }
+
+  export type GetCost_centersAggregateType<T extends Cost_centersAggregateArgs> = {
+        [P in keyof T & keyof AggregateCost_centers]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCost_centers[P]>
+      : GetScalarType<T[P], AggregateCost_centers[P]>
+  }
+
+
+
+
+  export type cost_centersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: cost_centersWhereInput
+    orderBy?: cost_centersOrderByWithAggregationInput | cost_centersOrderByWithAggregationInput[]
+    by: Cost_centersScalarFieldEnum[] | Cost_centersScalarFieldEnum
+    having?: cost_centersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Cost_centersCountAggregateInputType | true
+    _avg?: Cost_centersAvgAggregateInputType
+    _sum?: Cost_centersSumAggregateInputType
+    _min?: Cost_centersMinAggregateInputType
+    _max?: Cost_centersMaxAggregateInputType
+  }
+
+  export type Cost_centersGroupByOutputType = {
+    id: number
+    company_code: string
+    cost_center: string
+    branch: string
+    district: string
+    created_at: Date
+    updated_at: Date
+    _count: Cost_centersCountAggregateOutputType | null
+    _avg: Cost_centersAvgAggregateOutputType | null
+    _sum: Cost_centersSumAggregateOutputType | null
+    _min: Cost_centersMinAggregateOutputType | null
+    _max: Cost_centersMaxAggregateOutputType | null
+  }
+
+  type GetCost_centersGroupByPayload<T extends cost_centersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Cost_centersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Cost_centersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Cost_centersGroupByOutputType[P]>
+            : GetScalarType<T[P], Cost_centersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type cost_centersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    company_code?: boolean
+    cost_center?: boolean
+    branch?: boolean
+    district?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["cost_centers"]>
+
+  export type cost_centersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    company_code?: boolean
+    cost_center?: boolean
+    branch?: boolean
+    district?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["cost_centers"]>
+
+  export type cost_centersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    company_code?: boolean
+    cost_center?: boolean
+    branch?: boolean
+    district?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["cost_centers"]>
+
+  export type cost_centersSelectScalar = {
+    id?: boolean
+    company_code?: boolean
+    cost_center?: boolean
+    branch?: boolean
+    district?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type cost_centersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company_code" | "cost_center" | "branch" | "district" | "created_at" | "updated_at", ExtArgs["result"]["cost_centers"]>
+
+  export type $cost_centersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "cost_centers"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      company_code: string
+      cost_center: string
+      branch: string
+      district: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["cost_centers"]>
+    composites: {}
+  }
+
+  type cost_centersGetPayload<S extends boolean | null | undefined | cost_centersDefaultArgs> = $Result.GetResult<Prisma.$cost_centersPayload, S>
+
+  type cost_centersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<cost_centersFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Cost_centersCountAggregateInputType | true
+    }
+
+  export interface cost_centersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['cost_centers'], meta: { name: 'cost_centers' } }
+    /**
+     * Find zero or one Cost_centers that matches the filter.
+     * @param {cost_centersFindUniqueArgs} args - Arguments to find a Cost_centers
+     * @example
+     * // Get one Cost_centers
+     * const cost_centers = await prisma.cost_centers.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends cost_centersFindUniqueArgs>(args: SelectSubset<T, cost_centersFindUniqueArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Cost_centers that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {cost_centersFindUniqueOrThrowArgs} args - Arguments to find a Cost_centers
+     * @example
+     * // Get one Cost_centers
+     * const cost_centers = await prisma.cost_centers.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends cost_centersFindUniqueOrThrowArgs>(args: SelectSubset<T, cost_centersFindUniqueOrThrowArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Cost_centers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cost_centersFindFirstArgs} args - Arguments to find a Cost_centers
+     * @example
+     * // Get one Cost_centers
+     * const cost_centers = await prisma.cost_centers.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends cost_centersFindFirstArgs>(args?: SelectSubset<T, cost_centersFindFirstArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Cost_centers that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cost_centersFindFirstOrThrowArgs} args - Arguments to find a Cost_centers
+     * @example
+     * // Get one Cost_centers
+     * const cost_centers = await prisma.cost_centers.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends cost_centersFindFirstOrThrowArgs>(args?: SelectSubset<T, cost_centersFindFirstOrThrowArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Cost_centers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cost_centersFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Cost_centers
+     * const cost_centers = await prisma.cost_centers.findMany()
+     * 
+     * // Get first 10 Cost_centers
+     * const cost_centers = await prisma.cost_centers.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const cost_centersWithIdOnly = await prisma.cost_centers.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends cost_centersFindManyArgs>(args?: SelectSubset<T, cost_centersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Cost_centers.
+     * @param {cost_centersCreateArgs} args - Arguments to create a Cost_centers.
+     * @example
+     * // Create one Cost_centers
+     * const Cost_centers = await prisma.cost_centers.create({
+     *   data: {
+     *     // ... data to create a Cost_centers
+     *   }
+     * })
+     * 
+     */
+    create<T extends cost_centersCreateArgs>(args: SelectSubset<T, cost_centersCreateArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Cost_centers.
+     * @param {cost_centersCreateManyArgs} args - Arguments to create many Cost_centers.
+     * @example
+     * // Create many Cost_centers
+     * const cost_centers = await prisma.cost_centers.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends cost_centersCreateManyArgs>(args?: SelectSubset<T, cost_centersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Cost_centers and returns the data saved in the database.
+     * @param {cost_centersCreateManyAndReturnArgs} args - Arguments to create many Cost_centers.
+     * @example
+     * // Create many Cost_centers
+     * const cost_centers = await prisma.cost_centers.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Cost_centers and only return the `id`
+     * const cost_centersWithIdOnly = await prisma.cost_centers.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends cost_centersCreateManyAndReturnArgs>(args?: SelectSubset<T, cost_centersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Cost_centers.
+     * @param {cost_centersDeleteArgs} args - Arguments to delete one Cost_centers.
+     * @example
+     * // Delete one Cost_centers
+     * const Cost_centers = await prisma.cost_centers.delete({
+     *   where: {
+     *     // ... filter to delete one Cost_centers
+     *   }
+     * })
+     * 
+     */
+    delete<T extends cost_centersDeleteArgs>(args: SelectSubset<T, cost_centersDeleteArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Cost_centers.
+     * @param {cost_centersUpdateArgs} args - Arguments to update one Cost_centers.
+     * @example
+     * // Update one Cost_centers
+     * const cost_centers = await prisma.cost_centers.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends cost_centersUpdateArgs>(args: SelectSubset<T, cost_centersUpdateArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Cost_centers.
+     * @param {cost_centersDeleteManyArgs} args - Arguments to filter Cost_centers to delete.
+     * @example
+     * // Delete a few Cost_centers
+     * const { count } = await prisma.cost_centers.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends cost_centersDeleteManyArgs>(args?: SelectSubset<T, cost_centersDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Cost_centers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cost_centersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Cost_centers
+     * const cost_centers = await prisma.cost_centers.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends cost_centersUpdateManyArgs>(args: SelectSubset<T, cost_centersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Cost_centers and returns the data updated in the database.
+     * @param {cost_centersUpdateManyAndReturnArgs} args - Arguments to update many Cost_centers.
+     * @example
+     * // Update many Cost_centers
+     * const cost_centers = await prisma.cost_centers.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Cost_centers and only return the `id`
+     * const cost_centersWithIdOnly = await prisma.cost_centers.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends cost_centersUpdateManyAndReturnArgs>(args: SelectSubset<T, cost_centersUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Cost_centers.
+     * @param {cost_centersUpsertArgs} args - Arguments to update or create a Cost_centers.
+     * @example
+     * // Update or create a Cost_centers
+     * const cost_centers = await prisma.cost_centers.upsert({
+     *   create: {
+     *     // ... data to create a Cost_centers
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Cost_centers we want to update
+     *   }
+     * })
+     */
+    upsert<T extends cost_centersUpsertArgs>(args: SelectSubset<T, cost_centersUpsertArgs<ExtArgs>>): Prisma__cost_centersClient<$Result.GetResult<Prisma.$cost_centersPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Cost_centers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cost_centersCountArgs} args - Arguments to filter Cost_centers to count.
+     * @example
+     * // Count the number of Cost_centers
+     * const count = await prisma.cost_centers.count({
+     *   where: {
+     *     // ... the filter for the Cost_centers we want to count
+     *   }
+     * })
+    **/
+    count<T extends cost_centersCountArgs>(
+      args?: Subset<T, cost_centersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Cost_centersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Cost_centers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Cost_centersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Cost_centersAggregateArgs>(args: Subset<T, Cost_centersAggregateArgs>): Prisma.PrismaPromise<GetCost_centersAggregateType<T>>
+
+    /**
+     * Group by Cost_centers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {cost_centersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends cost_centersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: cost_centersGroupByArgs['orderBy'] }
+        : { orderBy?: cost_centersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, cost_centersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCost_centersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the cost_centers model
+   */
+  readonly fields: cost_centersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for cost_centers.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__cost_centersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the cost_centers model
+   */
+  interface cost_centersFieldRefs {
+    readonly id: FieldRef<"cost_centers", 'Int'>
+    readonly company_code: FieldRef<"cost_centers", 'String'>
+    readonly cost_center: FieldRef<"cost_centers", 'String'>
+    readonly branch: FieldRef<"cost_centers", 'String'>
+    readonly district: FieldRef<"cost_centers", 'String'>
+    readonly created_at: FieldRef<"cost_centers", 'DateTime'>
+    readonly updated_at: FieldRef<"cost_centers", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * cost_centers findUnique
+   */
+  export type cost_centersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * Filter, which cost_centers to fetch.
+     */
+    where: cost_centersWhereUniqueInput
+  }
+
+  /**
+   * cost_centers findUniqueOrThrow
+   */
+  export type cost_centersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * Filter, which cost_centers to fetch.
+     */
+    where: cost_centersWhereUniqueInput
+  }
+
+  /**
+   * cost_centers findFirst
+   */
+  export type cost_centersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * Filter, which cost_centers to fetch.
+     */
+    where?: cost_centersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cost_centers to fetch.
+     */
+    orderBy?: cost_centersOrderByWithRelationInput | cost_centersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for cost_centers.
+     */
+    cursor?: cost_centersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cost_centers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cost_centers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of cost_centers.
+     */
+    distinct?: Cost_centersScalarFieldEnum | Cost_centersScalarFieldEnum[]
+  }
+
+  /**
+   * cost_centers findFirstOrThrow
+   */
+  export type cost_centersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * Filter, which cost_centers to fetch.
+     */
+    where?: cost_centersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cost_centers to fetch.
+     */
+    orderBy?: cost_centersOrderByWithRelationInput | cost_centersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for cost_centers.
+     */
+    cursor?: cost_centersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cost_centers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cost_centers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of cost_centers.
+     */
+    distinct?: Cost_centersScalarFieldEnum | Cost_centersScalarFieldEnum[]
+  }
+
+  /**
+   * cost_centers findMany
+   */
+  export type cost_centersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * Filter, which cost_centers to fetch.
+     */
+    where?: cost_centersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of cost_centers to fetch.
+     */
+    orderBy?: cost_centersOrderByWithRelationInput | cost_centersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing cost_centers.
+     */
+    cursor?: cost_centersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` cost_centers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` cost_centers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of cost_centers.
+     */
+    distinct?: Cost_centersScalarFieldEnum | Cost_centersScalarFieldEnum[]
+  }
+
+  /**
+   * cost_centers create
+   */
+  export type cost_centersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * The data needed to create a cost_centers.
+     */
+    data: XOR<cost_centersCreateInput, cost_centersUncheckedCreateInput>
+  }
+
+  /**
+   * cost_centers createMany
+   */
+  export type cost_centersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many cost_centers.
+     */
+    data: cost_centersCreateManyInput | cost_centersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * cost_centers createManyAndReturn
+   */
+  export type cost_centersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * The data used to create many cost_centers.
+     */
+    data: cost_centersCreateManyInput | cost_centersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * cost_centers update
+   */
+  export type cost_centersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * The data needed to update a cost_centers.
+     */
+    data: XOR<cost_centersUpdateInput, cost_centersUncheckedUpdateInput>
+    /**
+     * Choose, which cost_centers to update.
+     */
+    where: cost_centersWhereUniqueInput
+  }
+
+  /**
+   * cost_centers updateMany
+   */
+  export type cost_centersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update cost_centers.
+     */
+    data: XOR<cost_centersUpdateManyMutationInput, cost_centersUncheckedUpdateManyInput>
+    /**
+     * Filter which cost_centers to update
+     */
+    where?: cost_centersWhereInput
+    /**
+     * Limit how many cost_centers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * cost_centers updateManyAndReturn
+   */
+  export type cost_centersUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * The data used to update cost_centers.
+     */
+    data: XOR<cost_centersUpdateManyMutationInput, cost_centersUncheckedUpdateManyInput>
+    /**
+     * Filter which cost_centers to update
+     */
+    where?: cost_centersWhereInput
+    /**
+     * Limit how many cost_centers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * cost_centers upsert
+   */
+  export type cost_centersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * The filter to search for the cost_centers to update in case it exists.
+     */
+    where: cost_centersWhereUniqueInput
+    /**
+     * In case the cost_centers found by the `where` argument doesn't exist, create a new cost_centers with this data.
+     */
+    create: XOR<cost_centersCreateInput, cost_centersUncheckedCreateInput>
+    /**
+     * In case the cost_centers was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<cost_centersUpdateInput, cost_centersUncheckedUpdateInput>
+  }
+
+  /**
+   * cost_centers delete
+   */
+  export type cost_centersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+    /**
+     * Filter which cost_centers to delete.
+     */
+    where: cost_centersWhereUniqueInput
+  }
+
+  /**
+   * cost_centers deleteMany
+   */
+  export type cost_centersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which cost_centers to delete
+     */
+    where?: cost_centersWhereInput
+    /**
+     * Limit how many cost_centers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * cost_centers without action
+   */
+  export type cost_centersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cost_centers
+     */
+    select?: cost_centersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cost_centers
+     */
+    omit?: cost_centersOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -43670,6 +44834,7 @@ export namespace Prisma {
     created_at: 'created_at',
     district: 'district',
     branch_code: 'branch_code',
+    cost_center: 'cost_center',
     is_active: 'is_active'
   };
 
@@ -44055,6 +45220,19 @@ export namespace Prisma {
   };
 
   export type Sub_processessScalarFieldEnum = (typeof Sub_processessScalarFieldEnum)[keyof typeof Sub_processessScalarFieldEnum]
+
+
+  export const Cost_centersScalarFieldEnum: {
+    id: 'id',
+    company_code: 'company_code',
+    cost_center: 'cost_center',
+    branch: 'branch',
+    district: 'district',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Cost_centersScalarFieldEnum = (typeof Cost_centersScalarFieldEnum)[keyof typeof Cost_centersScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -44618,6 +45796,7 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"branches"> | Date | string | null
     district?: StringNullableFilter<"branches"> | string | null
     branch_code?: StringNullableFilter<"branches"> | string | null
+    cost_center?: StringNullableFilter<"branches"> | string | null
     is_active?: BoolNullableFilter<"branches"> | boolean | null
     assets?: AssetsListRelationFilter
     maintenance_requests?: Maintenance_requestsListRelationFilter
@@ -44632,6 +45811,7 @@ export namespace Prisma {
     created_at?: SortOrderInput | SortOrder
     district?: SortOrderInput | SortOrder
     branch_code?: SortOrderInput | SortOrder
+    cost_center?: SortOrderInput | SortOrder
     is_active?: SortOrderInput | SortOrder
     assets?: assetsOrderByRelationAggregateInput
     maintenance_requests?: maintenance_requestsOrderByRelationAggregateInput
@@ -44649,6 +45829,7 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"branches"> | Date | string | null
     district?: StringNullableFilter<"branches"> | string | null
     branch_code?: StringNullableFilter<"branches"> | string | null
+    cost_center?: StringNullableFilter<"branches"> | string | null
     is_active?: BoolNullableFilter<"branches"> | boolean | null
     assets?: AssetsListRelationFilter
     maintenance_requests?: Maintenance_requestsListRelationFilter
@@ -44663,6 +45844,7 @@ export namespace Prisma {
     created_at?: SortOrderInput | SortOrder
     district?: SortOrderInput | SortOrder
     branch_code?: SortOrderInput | SortOrder
+    cost_center?: SortOrderInput | SortOrder
     is_active?: SortOrderInput | SortOrder
     _count?: branchesCountOrderByAggregateInput
     _avg?: branchesAvgOrderByAggregateInput
@@ -44681,6 +45863,7 @@ export namespace Prisma {
     created_at?: DateTimeNullableWithAggregatesFilter<"branches"> | Date | string | null
     district?: StringNullableWithAggregatesFilter<"branches"> | string | null
     branch_code?: StringNullableWithAggregatesFilter<"branches"> | string | null
+    cost_center?: StringNullableWithAggregatesFilter<"branches"> | string | null
     is_active?: BoolNullableWithAggregatesFilter<"branches"> | boolean | null
   }
 
@@ -46844,6 +48027,70 @@ export namespace Prisma {
     subprocess_acrnm?: StringNullableWithAggregatesFilter<"sub_processess"> | string | null
   }
 
+  export type cost_centersWhereInput = {
+    AND?: cost_centersWhereInput | cost_centersWhereInput[]
+    OR?: cost_centersWhereInput[]
+    NOT?: cost_centersWhereInput | cost_centersWhereInput[]
+    id?: IntFilter<"cost_centers"> | number
+    company_code?: StringFilter<"cost_centers"> | string
+    cost_center?: StringFilter<"cost_centers"> | string
+    branch?: StringFilter<"cost_centers"> | string
+    district?: StringFilter<"cost_centers"> | string
+    created_at?: DateTimeFilter<"cost_centers"> | Date | string
+    updated_at?: DateTimeFilter<"cost_centers"> | Date | string
+  }
+
+  export type cost_centersOrderByWithRelationInput = {
+    id?: SortOrder
+    company_code?: SortOrder
+    cost_center?: SortOrder
+    branch?: SortOrder
+    district?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type cost_centersWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: cost_centersWhereInput | cost_centersWhereInput[]
+    OR?: cost_centersWhereInput[]
+    NOT?: cost_centersWhereInput | cost_centersWhereInput[]
+    company_code?: StringFilter<"cost_centers"> | string
+    cost_center?: StringFilter<"cost_centers"> | string
+    branch?: StringFilter<"cost_centers"> | string
+    district?: StringFilter<"cost_centers"> | string
+    created_at?: DateTimeFilter<"cost_centers"> | Date | string
+    updated_at?: DateTimeFilter<"cost_centers"> | Date | string
+  }, "id">
+
+  export type cost_centersOrderByWithAggregationInput = {
+    id?: SortOrder
+    company_code?: SortOrder
+    cost_center?: SortOrder
+    branch?: SortOrder
+    district?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: cost_centersCountOrderByAggregateInput
+    _avg?: cost_centersAvgOrderByAggregateInput
+    _max?: cost_centersMaxOrderByAggregateInput
+    _min?: cost_centersMinOrderByAggregateInput
+    _sum?: cost_centersSumOrderByAggregateInput
+  }
+
+  export type cost_centersScalarWhereWithAggregatesInput = {
+    AND?: cost_centersScalarWhereWithAggregatesInput | cost_centersScalarWhereWithAggregatesInput[]
+    OR?: cost_centersScalarWhereWithAggregatesInput[]
+    NOT?: cost_centersScalarWhereWithAggregatesInput | cost_centersScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"cost_centers"> | number
+    company_code?: StringWithAggregatesFilter<"cost_centers"> | string
+    cost_center?: StringWithAggregatesFilter<"cost_centers"> | string
+    branch?: StringWithAggregatesFilter<"cost_centers"> | string
+    district?: StringWithAggregatesFilter<"cost_centers"> | string
+    created_at?: DateTimeWithAggregatesFilter<"cost_centers"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"cost_centers"> | Date | string
+  }
+
   export type asset_categoriesCreateInput = {
     category_name: string
     is_active?: boolean | null
@@ -47228,6 +48475,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsCreateNestedManyWithoutBranchesInput
     maintenance_requests?: maintenance_requestsCreateNestedManyWithoutBranchesInput
@@ -47242,6 +48490,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsUncheckedCreateNestedManyWithoutBranchesInput
     maintenance_requests?: maintenance_requestsUncheckedCreateNestedManyWithoutBranchesInput
@@ -47255,6 +48504,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUpdateManyWithoutBranchesNestedInput
     maintenance_requests?: maintenance_requestsUpdateManyWithoutBranchesNestedInput
@@ -47269,6 +48519,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUncheckedUpdateManyWithoutBranchesNestedInput
     maintenance_requests?: maintenance_requestsUncheckedUpdateManyWithoutBranchesNestedInput
@@ -47283,6 +48534,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
   }
 
@@ -47292,6 +48544,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
@@ -47302,6 +48555,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
@@ -49456,6 +50710,73 @@ export namespace Prisma {
     subprocess_acrnm?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type cost_centersCreateInput = {
+    company_code: string
+    cost_center: string
+    branch: string
+    district: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type cost_centersUncheckedCreateInput = {
+    id?: number
+    company_code: string
+    cost_center: string
+    branch: string
+    district: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type cost_centersUpdateInput = {
+    company_code?: StringFieldUpdateOperationsInput | string
+    cost_center?: StringFieldUpdateOperationsInput | string
+    branch?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type cost_centersUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    company_code?: StringFieldUpdateOperationsInput | string
+    cost_center?: StringFieldUpdateOperationsInput | string
+    branch?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type cost_centersCreateManyInput = {
+    id?: number
+    company_code: string
+    cost_center: string
+    branch: string
+    district: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type cost_centersUpdateManyMutationInput = {
+    company_code?: StringFieldUpdateOperationsInput | string
+    cost_center?: StringFieldUpdateOperationsInput | string
+    branch?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type cost_centersUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    company_code?: StringFieldUpdateOperationsInput | string
+    cost_center?: StringFieldUpdateOperationsInput | string
+    branch?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -49959,6 +51280,7 @@ export namespace Prisma {
     created_at?: SortOrder
     district?: SortOrder
     branch_code?: SortOrder
+    cost_center?: SortOrder
     is_active?: SortOrder
   }
 
@@ -49973,6 +51295,7 @@ export namespace Prisma {
     created_at?: SortOrder
     district?: SortOrder
     branch_code?: SortOrder
+    cost_center?: SortOrder
     is_active?: SortOrder
   }
 
@@ -49983,6 +51306,7 @@ export namespace Prisma {
     created_at?: SortOrder
     district?: SortOrder
     branch_code?: SortOrder
+    cost_center?: SortOrder
     is_active?: SortOrder
   }
 
@@ -51644,6 +52968,44 @@ export namespace Prisma {
     _sum?: NestedBigIntNullableFilter<$PrismaModel>
     _min?: NestedBigIntNullableFilter<$PrismaModel>
     _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type cost_centersCountOrderByAggregateInput = {
+    id?: SortOrder
+    company_code?: SortOrder
+    cost_center?: SortOrder
+    branch?: SortOrder
+    district?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type cost_centersAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type cost_centersMaxOrderByAggregateInput = {
+    id?: SortOrder
+    company_code?: SortOrder
+    cost_center?: SortOrder
+    branch?: SortOrder
+    district?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type cost_centersMinOrderByAggregateInput = {
+    id?: SortOrder
+    company_code?: SortOrder
+    cost_center?: SortOrder
+    branch?: SortOrder
+    district?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type cost_centersSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type asset_categoriesCreateNestedOneWithoutOther_asset_categoriesInput = {
@@ -55965,6 +57327,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     maintenance_requests?: maintenance_requestsCreateNestedManyWithoutBranchesInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesCreateNestedManyWithoutBranchesInput
@@ -55978,6 +57341,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     maintenance_requests?: maintenance_requestsUncheckedCreateNestedManyWithoutBranchesInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutBranchesInput
@@ -56224,6 +57588,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     maintenance_requests?: maintenance_requestsUpdateManyWithoutBranchesNestedInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUpdateManyWithoutBranchesNestedInput
@@ -56237,6 +57602,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     maintenance_requests?: maintenance_requestsUncheckedUpdateManyWithoutBranchesNestedInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutBranchesNestedInput
@@ -57596,6 +58962,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsCreateNestedManyWithoutBranchesInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesCreateNestedManyWithoutBranchesInput
@@ -57609,6 +58976,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsUncheckedCreateNestedManyWithoutBranchesInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUncheckedCreateNestedManyWithoutBranchesInput
@@ -58446,6 +59814,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUpdateManyWithoutBranchesNestedInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUpdateManyWithoutBranchesNestedInput
@@ -58459,6 +59828,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUncheckedUpdateManyWithoutBranchesNestedInput
     preventive_maintenance_schedules?: preventive_maintenance_schedulesUncheckedUpdateManyWithoutBranchesNestedInput
@@ -60097,6 +61467,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsCreateNestedManyWithoutBranchesInput
     maintenance_requests?: maintenance_requestsCreateNestedManyWithoutBranchesInput
@@ -60110,6 +61481,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsUncheckedCreateNestedManyWithoutBranchesInput
     maintenance_requests?: maintenance_requestsUncheckedCreateNestedManyWithoutBranchesInput
@@ -60366,6 +61738,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUpdateManyWithoutBranchesNestedInput
     maintenance_requests?: maintenance_requestsUpdateManyWithoutBranchesNestedInput
@@ -60379,6 +61752,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUncheckedUpdateManyWithoutBranchesNestedInput
     maintenance_requests?: maintenance_requestsUncheckedUpdateManyWithoutBranchesNestedInput
@@ -63845,6 +65219,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsCreateNestedManyWithoutBranchesInput
     maintenance_requests?: maintenance_requestsCreateNestedManyWithoutBranchesInput
@@ -63858,6 +65233,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     district?: string | null
     branch_code?: string | null
+    cost_center?: string | null
     is_active?: boolean | null
     assets?: assetsUncheckedCreateNestedManyWithoutBranchesInput
     maintenance_requests?: maintenance_requestsUncheckedCreateNestedManyWithoutBranchesInput
@@ -64222,6 +65598,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUpdateManyWithoutBranchesNestedInput
     maintenance_requests?: maintenance_requestsUpdateManyWithoutBranchesNestedInput
@@ -64235,6 +65612,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     district?: NullableStringFieldUpdateOperationsInput | string | null
     branch_code?: NullableStringFieldUpdateOperationsInput | string | null
+    cost_center?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: NullableBoolFieldUpdateOperationsInput | boolean | null
     assets?: assetsUncheckedUpdateManyWithoutBranchesNestedInput
     maintenance_requests?: maintenance_requestsUncheckedUpdateManyWithoutBranchesNestedInput

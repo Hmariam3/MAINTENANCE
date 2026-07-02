@@ -50,8 +50,8 @@ exports.getLookups = async (req, res) => {
       sub_processess: formattedSubProcessess,
       technicians,
       hold_reasons: holdReasons,
-      party_types:  partyTypes,
-      roles:        roles,
+      party_types: partyTypes,
+      roles: roles,
     });
   } catch (err) {
     console.error(err);

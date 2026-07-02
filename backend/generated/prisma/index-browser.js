@@ -179,6 +179,7 @@ exports.Prisma.BranchesScalarFieldEnum = {
   created_at: 'created_at',
   district: 'district',
   branch_code: 'branch_code',
+  cost_center: 'cost_center',
   is_active: 'is_active'
 };
 
@@ -482,6 +483,16 @@ exports.Prisma.Sub_processessScalarFieldEnum = {
   subprocess_acrnm: 'subprocess_acrnm'
 };
 
+exports.Prisma.Cost_centersScalarFieldEnum = {
+  id: 'id',
+  company_code: 'company_code',
+  cost_center: 'cost_center',
+  branch: 'branch',
+  district: 'district',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -561,7 +572,8 @@ exports.Prisma.ModelName = {
   vendor_request_assignments: 'vendor_request_assignments',
   vendors: 'vendors',
   processess: 'processess',
-  sub_processess: 'sub_processess'
+  sub_processess: 'sub_processess',
+  cost_centers: 'cost_centers'
 };
 
 /**
