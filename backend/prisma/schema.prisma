@@ -242,6 +242,9 @@ model preventive_maintenance_logs {
   supervisor_user_id                                            Int?
   supervisor_approved_at                                        DateTime?                        @db.Timestamptz(6)
   supervisor_notes                                              String?
+  hardware_replaced                                             String?                          @db.VarChar(100)
+  cost                                                          Decimal?                         @db.Decimal(10, 2)
+  cost_saved                                                    Decimal?                         @db.Decimal(10, 2)
   status                                                        String?                          @default("Pending Approval") @db.VarChar(50)
   maintenance_requests                                          maintenance_requests?            @relation(fields: [linked_request_id], references: [request_id], onDelete: NoAction, onUpdate: NoAction)
   users_preventive_maintenance_logs_performed_by_user_idTousers users                            @relation("preventive_maintenance_logs_performed_by_user_idTousers", fields: [performed_by_user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
@@ -523,6 +526,7 @@ enum frequency_type_enum {
   Monthly
   Quarterly
   Annually
+  Once
 }
 
 enum notification_channel_enum {

@@ -26,13 +26,14 @@ const PMSchedules = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showLogModal, setShowLogModal] = useState(false);
   const [selectedScheduleId, setSelectedScheduleId] = useState(null);
+  const [selectedSchedule, setSelectedSchedule] = useState(null);
 
   const [formData, setFormData] = useState({
     schedule_name: '', branch_id: '', category_id: '', asset_id: '', frequency_type: 'Monthly', next_due_date: ''
   });
   const [branchSearch, setBranchSearch] = useState('');
   const [logData, setLogData] = useState({
-    notes: '', next_scheduled_date: ''
+    notes: '', next_scheduled_date: '', hardware_replaced: '', cost: '', cost_saved: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,7 +86,7 @@ const PMSchedules = () => {
     try {
       await api.post('/pm/logs', { schedule_id: selectedScheduleId, ...logData });
       setShowLogModal(false);
-      setLogData({ notes: '', next_scheduled_date: '' });
+      setLogData({ notes: '', next_scheduled_date: '', hardware_replaced: '', cost: '', cost_saved: '' });
       alert('Work logged and sent for approval!');
     } catch (err) {
       alert(err.response?.data?.error || 'Failed to log work');
@@ -94,8 +95,9 @@ const PMSchedules = () => {
     }
   };
 
-  const openLogModal = (scheduleId) => {
-    setSelectedScheduleId(scheduleId);
+  const openLogModal = (schedule) => {
+    setSelectedScheduleId(schedule.schedule_id);
+    setSelectedSchedule(schedule);
     setShowLogModal(true);
   };
 
@@ -149,7 +151,7 @@ const PMSchedules = () => {
                 {s.next_due_date && <span style={{ color: '#eab308' }}>📅 Next Due: <strong>{new Date(s.next_due_date).toLocaleDateString()}</strong></span>}
               </div>
               <button
-                onClick={() => openLogModal(s.schedule_id)}
+                onClick={() => openLogModal(s)}
                 style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid var(--primary)', backgroundColor: 'transparent', color: 'var(--primary)', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transition: 'all 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'var(--primary)'; e.currentTarget.style.color = 'white'; }}
                 onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--primary)'; }}
@@ -215,6 +217,7 @@ const PMSchedules = () => {
                     <option value="Monthly">Monthly</option>
                     <option value="Quarterly">Quarterly</option>
                     <option value="Annually">Annually</option>
+                    <option value="Once">Once</option>
                   </select>
                 </div>
                 <div style={fieldStyle}>
@@ -240,13 +243,35 @@ const PMSchedules = () => {
               <button onClick={() => setShowLogModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}><X size={20} /></button>
             </div>
             <form onSubmit={handleLogWork} style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {selectedSchedule && (
+                <div style={{ backgroundColor: 'var(--bg-color)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                  <div style={fieldStyle}><span>Asset Tag:</span> <strong style={{ color: 'var(--text-main)' }}>{selectedSchedule.assets?.tag_number || 'N/A'}</strong></div>
+                  <div style={fieldStyle}><span>Brand/Model:</span> <strong style={{ color: 'var(--text-main)' }}>{selectedSchedule.brand || selectedSchedule.assets?.brand} {selectedSchedule.model || selectedSchedule.assets?.model}</strong></div>
+                  <div style={fieldStyle}><span>Serial No:</span> <strong style={{ color: 'var(--text-main)' }}>{selectedSchedule.serial_number || selectedSchedule.assets?.serial_number || 'N/A'}</strong></div>
+                  <div style={fieldStyle}><span>Branch:</span> <strong style={{ color: 'var(--text-main)' }}>{selectedSchedule.branches?.branch_name || 'N/A'}</strong></div>
+                </div>
+              )}
               <div style={fieldStyle}>
                 <label style={labelStyle}>Work Notes / Remarks *</label>
-                <textarea required rows={4} style={{ ...inputStyle, resize: 'vertical' }} value={logData.notes} onChange={e => setLogData({ ...logData, notes: e.target.value })} placeholder="Describe the work performed..." />
+                <textarea required rows={3} style={{ ...inputStyle, resize: 'vertical' }} value={logData.notes} onChange={e => setLogData({ ...logData, notes: e.target.value })} placeholder="Describe the work performed..." />
               </div>
-              <div style={fieldStyle}>
-                <label style={labelStyle}>Next Scheduled Date (Optional)</label>
-                <input type="date" style={inputStyle} value={logData.next_scheduled_date} onChange={e => setLogData({ ...logData, next_scheduled_date: e.target.value })} />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div style={fieldStyle}>
+                  <label style={labelStyle}>Replaced Spare Part List</label>
+                  <input value={logData.hardware_replaced} onChange={e => setLogData({ ...logData, hardware_replaced: e.target.value })} style={inputStyle} placeholder="e.g. Filter, Belt" />
+                </div>
+                <div style={fieldStyle}>
+                  <label style={labelStyle}>Spare Part Cost</label>
+                  <input type="number" step="0.01" value={logData.cost} onChange={e => setLogData({ ...logData, cost: e.target.value })} style={inputStyle} placeholder="0.00" />
+                </div>
+                <div style={fieldStyle}>
+                  <label style={labelStyle}>Labor Cost</label>
+                  <input type="number" step="0.01" value={logData.cost_saved} onChange={e => setLogData({ ...logData, cost_saved: e.target.value })} style={inputStyle} placeholder="0.00" />
+                </div>
+                <div style={fieldStyle}>
+                  <label style={labelStyle}>Next Scheduled Date</label>
+                  <input type="date" style={inputStyle} value={logData.next_scheduled_date} onChange={e => setLogData({ ...logData, next_scheduled_date: e.target.value })} />
+                </div>
               </div>
               <div style={{ padding: '0.8rem', backgroundColor: 'rgba(234,179,8,0.1)', borderRadius: '8px', color: '#b45309', fontSize: '0.85rem' }}>
                 Submitting this will send the log to the branch supervisor for approval.

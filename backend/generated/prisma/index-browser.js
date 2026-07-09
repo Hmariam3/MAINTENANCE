@@ -289,6 +289,9 @@ exports.Prisma.Preventive_maintenance_logsScalarFieldEnum = {
   supervisor_user_id: 'supervisor_user_id',
   supervisor_approved_at: 'supervisor_approved_at',
   supervisor_notes: 'supervisor_notes',
+  hardware_replaced: 'hardware_replaced',
+  cost: 'cost',
+  cost_saved: 'cost_saved',
   status: 'status'
 };
 
@@ -531,7 +534,8 @@ exports.frequency_type_enum = exports.$Enums.frequency_type_enum = {
   Weekly: 'Weekly',
   Monthly: 'Monthly',
   Quarterly: 'Quarterly',
-  Annually: 'Annually'
+  Annually: 'Annually',
+  Once: 'Once'
 };
 
 exports.sla_status_enum = exports.$Enums.sla_status_enum = {

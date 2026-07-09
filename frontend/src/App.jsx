@@ -17,7 +17,7 @@ import PMApprovals from './components/PMApprovals';
 
 import SetProfile from './components/SetProfile';
 
-const Inventory = () => <div className="p-6"><h1>Inventory</h1><p>Spare parts and stock levels.</p></div>;
+// const Inventory = () => <div className="p-6"><h1>Inventory</h1><p>Spare parts and stock levels.</p></div>;
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
@@ -46,8 +46,12 @@ function AppContent() {
           <h2>MaintenanceHub</h2>
         </div>
         <ul className="nav-links">
-          <li><Link to="/"><Activity className="icon" /> Dashboard</Link></li>
-          <li><Link to="/assets"><Package className="icon" /> Assets</Link></li>
+          {[2, 3, 4, 5, 8].includes(user.role_id) && (
+            <li><Link to="/"><Activity className="icon" /> Dashboard</Link></li>
+          )}
+          {[5, 4].includes(user.role_id) && (
+            <li><Link to="/assets"><Package className="icon" /> Assets</Link></li>
+          )}
           <li><Link to="/requests"><Wrench className="icon" /> Requests</Link></li>
           {/* <li><Link to="/inventory"><Settings className="icon" /> Inventory</Link></li> */}
           {user.role_id === 4 && (
@@ -74,9 +78,9 @@ function AppContent() {
 
         <div className="content-area">
           <Routes>
-            <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/assets" element={<ProtectedRoute><Assets /></ProtectedRoute>} />
-            <Route path="/assets/new" element={<ProtectedRoute><CreateAsset /></ProtectedRoute>} />
+            <Route path="/" element={<ProtectedRoute>{[2, 5, 8].includes(user.role_id) ? <Dashboard /> : <Navigate to="/requests" />}</ProtectedRoute>} />
+            <Route path="/assets" element={<ProtectedRoute>{[5, 4].includes(user.role_id) ? <Assets /> : <Navigate to="/" />}</ProtectedRoute>} />
+            <Route path="/assets/new" element={<ProtectedRoute>{[5, 4].includes(user.role_id) ? <CreateAsset /> : <Navigate to="/" />}</ProtectedRoute>} />
             <Route path="/requests" element={<ProtectedRoute><Requests /></ProtectedRoute>} />
             <Route path="/requests/new" element={<ProtectedRoute><CreateRequest /></ProtectedRoute>} />
             <Route path="/requests/:id" element={<ProtectedRoute><RequestDetail /></ProtectedRoute>} />

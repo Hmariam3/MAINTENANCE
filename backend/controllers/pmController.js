@@ -118,7 +118,7 @@ exports.getLogs = async (req, res) => {
 exports.createLog = async (req, res) => {
   try {
     const { user_id } = req.user;
-    const { schedule_id, notes, next_scheduled_date } = req.body;
+    const { schedule_id, notes, next_scheduled_date, hardware_replaced, cost, cost_saved } = req.body;
 
     const log = await prisma.preventive_maintenance_logs.create({
       data: {
@@ -126,6 +126,9 @@ exports.createLog = async (req, res) => {
         performed_by_user_id: user_id,
         notes,
         next_scheduled_date: next_scheduled_date ? new Date(next_scheduled_date) : null,
+        hardware_replaced,
+        cost: cost ? parseFloat(cost) : null,
+        cost_saved: cost_saved ? parseFloat(cost_saved) : null,
         status: "Pending Approval"
       }
     });

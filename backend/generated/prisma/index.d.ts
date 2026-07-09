@@ -207,7 +207,8 @@ export const frequency_type_enum: {
   Weekly: 'Weekly',
   Monthly: 'Monthly',
   Quarterly: 'Quarterly',
-  Annually: 'Annually'
+  Annually: 'Annually',
+  Once: 'Once'
 };
 
 export type frequency_type_enum = (typeof frequency_type_enum)[keyof typeof frequency_type_enum]
@@ -20763,6 +20764,8 @@ export namespace Prisma {
     performed_by_user_id: number | null
     linked_request_id: number | null
     supervisor_user_id: number | null
+    cost: Decimal | null
+    cost_saved: Decimal | null
   }
 
   export type Preventive_maintenance_logsSumAggregateOutputType = {
@@ -20771,6 +20774,8 @@ export namespace Prisma {
     performed_by_user_id: number | null
     linked_request_id: number | null
     supervisor_user_id: number | null
+    cost: Decimal | null
+    cost_saved: Decimal | null
   }
 
   export type Preventive_maintenance_logsMinAggregateOutputType = {
@@ -20784,6 +20789,9 @@ export namespace Prisma {
     supervisor_user_id: number | null
     supervisor_approved_at: Date | null
     supervisor_notes: string | null
+    hardware_replaced: string | null
+    cost: Decimal | null
+    cost_saved: Decimal | null
     status: string | null
   }
 
@@ -20798,6 +20806,9 @@ export namespace Prisma {
     supervisor_user_id: number | null
     supervisor_approved_at: Date | null
     supervisor_notes: string | null
+    hardware_replaced: string | null
+    cost: Decimal | null
+    cost_saved: Decimal | null
     status: string | null
   }
 
@@ -20812,6 +20823,9 @@ export namespace Prisma {
     supervisor_user_id: number
     supervisor_approved_at: number
     supervisor_notes: number
+    hardware_replaced: number
+    cost: number
+    cost_saved: number
     status: number
     _all: number
   }
@@ -20823,6 +20837,8 @@ export namespace Prisma {
     performed_by_user_id?: true
     linked_request_id?: true
     supervisor_user_id?: true
+    cost?: true
+    cost_saved?: true
   }
 
   export type Preventive_maintenance_logsSumAggregateInputType = {
@@ -20831,6 +20847,8 @@ export namespace Prisma {
     performed_by_user_id?: true
     linked_request_id?: true
     supervisor_user_id?: true
+    cost?: true
+    cost_saved?: true
   }
 
   export type Preventive_maintenance_logsMinAggregateInputType = {
@@ -20844,6 +20862,9 @@ export namespace Prisma {
     supervisor_user_id?: true
     supervisor_approved_at?: true
     supervisor_notes?: true
+    hardware_replaced?: true
+    cost?: true
+    cost_saved?: true
     status?: true
   }
 
@@ -20858,6 +20879,9 @@ export namespace Prisma {
     supervisor_user_id?: true
     supervisor_approved_at?: true
     supervisor_notes?: true
+    hardware_replaced?: true
+    cost?: true
+    cost_saved?: true
     status?: true
   }
 
@@ -20872,6 +20896,9 @@ export namespace Prisma {
     supervisor_user_id?: true
     supervisor_approved_at?: true
     supervisor_notes?: true
+    hardware_replaced?: true
+    cost?: true
+    cost_saved?: true
     status?: true
     _all?: true
   }
@@ -20973,6 +21000,9 @@ export namespace Prisma {
     supervisor_user_id: number | null
     supervisor_approved_at: Date | null
     supervisor_notes: string | null
+    hardware_replaced: string | null
+    cost: Decimal | null
+    cost_saved: Decimal | null
     status: string | null
     _count: Preventive_maintenance_logsCountAggregateOutputType | null
     _avg: Preventive_maintenance_logsAvgAggregateOutputType | null
@@ -21006,6 +21036,9 @@ export namespace Prisma {
     supervisor_user_id?: boolean
     supervisor_approved_at?: boolean
     supervisor_notes?: boolean
+    hardware_replaced?: boolean
+    cost?: boolean
+    cost_saved?: boolean
     status?: boolean
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
     users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
@@ -21024,6 +21057,9 @@ export namespace Prisma {
     supervisor_user_id?: boolean
     supervisor_approved_at?: boolean
     supervisor_notes?: boolean
+    hardware_replaced?: boolean
+    cost?: boolean
+    cost_saved?: boolean
     status?: boolean
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
     users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
@@ -21042,6 +21078,9 @@ export namespace Prisma {
     supervisor_user_id?: boolean
     supervisor_approved_at?: boolean
     supervisor_notes?: boolean
+    hardware_replaced?: boolean
+    cost?: boolean
+    cost_saved?: boolean
     status?: boolean
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
     users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
@@ -21060,10 +21099,13 @@ export namespace Prisma {
     supervisor_user_id?: boolean
     supervisor_approved_at?: boolean
     supervisor_notes?: boolean
+    hardware_replaced?: boolean
+    cost?: boolean
+    cost_saved?: boolean
     status?: boolean
   }
 
-  export type preventive_maintenance_logsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"log_id" | "schedule_id" | "performed_by_user_id" | "performed_date" | "notes" | "next_scheduled_date" | "linked_request_id" | "supervisor_user_id" | "supervisor_approved_at" | "supervisor_notes" | "status", ExtArgs["result"]["preventive_maintenance_logs"]>
+  export type preventive_maintenance_logsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"log_id" | "schedule_id" | "performed_by_user_id" | "performed_date" | "notes" | "next_scheduled_date" | "linked_request_id" | "supervisor_user_id" | "supervisor_approved_at" | "supervisor_notes" | "hardware_replaced" | "cost" | "cost_saved" | "status", ExtArgs["result"]["preventive_maintenance_logs"]>
   export type preventive_maintenance_logsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     maintenance_requests?: boolean | preventive_maintenance_logs$maintenance_requestsArgs<ExtArgs>
     users_preventive_maintenance_logs_performed_by_user_idTousers?: boolean | usersDefaultArgs<ExtArgs>
@@ -21102,6 +21144,9 @@ export namespace Prisma {
       supervisor_user_id: number | null
       supervisor_approved_at: Date | null
       supervisor_notes: string | null
+      hardware_replaced: string | null
+      cost: Prisma.Decimal | null
+      cost_saved: Prisma.Decimal | null
       status: string | null
     }, ExtArgs["result"]["preventive_maintenance_logs"]>
     composites: {}
@@ -21540,6 +21585,9 @@ export namespace Prisma {
     readonly supervisor_user_id: FieldRef<"preventive_maintenance_logs", 'Int'>
     readonly supervisor_approved_at: FieldRef<"preventive_maintenance_logs", 'DateTime'>
     readonly supervisor_notes: FieldRef<"preventive_maintenance_logs", 'String'>
+    readonly hardware_replaced: FieldRef<"preventive_maintenance_logs", 'String'>
+    readonly cost: FieldRef<"preventive_maintenance_logs", 'Decimal'>
+    readonly cost_saved: FieldRef<"preventive_maintenance_logs", 'Decimal'>
     readonly status: FieldRef<"preventive_maintenance_logs", 'String'>
   }
     
@@ -44971,6 +45019,9 @@ export namespace Prisma {
     supervisor_user_id: 'supervisor_user_id',
     supervisor_approved_at: 'supervisor_approved_at',
     supervisor_notes: 'supervisor_notes',
+    hardware_replaced: 'hardware_replaced',
+    cost: 'cost',
+    cost_saved: 'cost_saved',
     status: 'status'
   };
 
@@ -46561,6 +46612,9 @@ export namespace Prisma {
     supervisor_user_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
     supervisor_approved_at?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
     supervisor_notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    hardware_replaced?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    cost?: DecimalNullableFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: DecimalNullableFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
     status?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
     maintenance_requests?: XOR<Maintenance_requestsNullableScalarRelationFilter, maintenance_requestsWhereInput> | null
     users_preventive_maintenance_logs_performed_by_user_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
@@ -46579,6 +46633,9 @@ export namespace Prisma {
     supervisor_user_id?: SortOrderInput | SortOrder
     supervisor_approved_at?: SortOrderInput | SortOrder
     supervisor_notes?: SortOrderInput | SortOrder
+    hardware_replaced?: SortOrderInput | SortOrder
+    cost?: SortOrderInput | SortOrder
+    cost_saved?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     maintenance_requests?: maintenance_requestsOrderByWithRelationInput
     users_preventive_maintenance_logs_performed_by_user_idTousers?: usersOrderByWithRelationInput
@@ -46600,6 +46657,9 @@ export namespace Prisma {
     supervisor_user_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
     supervisor_approved_at?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
     supervisor_notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    hardware_replaced?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    cost?: DecimalNullableFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: DecimalNullableFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
     status?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
     maintenance_requests?: XOR<Maintenance_requestsNullableScalarRelationFilter, maintenance_requestsWhereInput> | null
     users_preventive_maintenance_logs_performed_by_user_idTousers?: XOR<UsersScalarRelationFilter, usersWhereInput>
@@ -46618,6 +46678,9 @@ export namespace Prisma {
     supervisor_user_id?: SortOrderInput | SortOrder
     supervisor_approved_at?: SortOrderInput | SortOrder
     supervisor_notes?: SortOrderInput | SortOrder
+    hardware_replaced?: SortOrderInput | SortOrder
+    cost?: SortOrderInput | SortOrder
+    cost_saved?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     _count?: preventive_maintenance_logsCountOrderByAggregateInput
     _avg?: preventive_maintenance_logsAvgOrderByAggregateInput
@@ -46640,6 +46703,9 @@ export namespace Prisma {
     supervisor_user_id?: IntNullableWithAggregatesFilter<"preventive_maintenance_logs"> | number | null
     supervisor_approved_at?: DateTimeNullableWithAggregatesFilter<"preventive_maintenance_logs"> | Date | string | null
     supervisor_notes?: StringNullableWithAggregatesFilter<"preventive_maintenance_logs"> | string | null
+    hardware_replaced?: StringNullableWithAggregatesFilter<"preventive_maintenance_logs"> | string | null
+    cost?: DecimalNullableWithAggregatesFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: DecimalNullableWithAggregatesFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
     status?: StringNullableWithAggregatesFilter<"preventive_maintenance_logs"> | string | null
   }
 
@@ -49250,6 +49316,9 @@ export namespace Prisma {
     next_scheduled_date?: Date | string | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
     maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
     users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
@@ -49268,6 +49337,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -49277,6 +49349,9 @@ export namespace Prisma {
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
     users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
@@ -49295,6 +49370,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -49309,6 +49387,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -49318,6 +49399,9 @@ export namespace Prisma {
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -49332,6 +49416,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -51915,6 +52002,9 @@ export namespace Prisma {
     supervisor_user_id?: SortOrder
     supervisor_approved_at?: SortOrder
     supervisor_notes?: SortOrder
+    hardware_replaced?: SortOrder
+    cost?: SortOrder
+    cost_saved?: SortOrder
     status?: SortOrder
   }
 
@@ -51924,6 +52014,8 @@ export namespace Prisma {
     performed_by_user_id?: SortOrder
     linked_request_id?: SortOrder
     supervisor_user_id?: SortOrder
+    cost?: SortOrder
+    cost_saved?: SortOrder
   }
 
   export type preventive_maintenance_logsMaxOrderByAggregateInput = {
@@ -51937,6 +52029,9 @@ export namespace Prisma {
     supervisor_user_id?: SortOrder
     supervisor_approved_at?: SortOrder
     supervisor_notes?: SortOrder
+    hardware_replaced?: SortOrder
+    cost?: SortOrder
+    cost_saved?: SortOrder
     status?: SortOrder
   }
 
@@ -51951,6 +52046,9 @@ export namespace Prisma {
     supervisor_user_id?: SortOrder
     supervisor_approved_at?: SortOrder
     supervisor_notes?: SortOrder
+    hardware_replaced?: SortOrder
+    cost?: SortOrder
+    cost_saved?: SortOrder
     status?: SortOrder
   }
 
@@ -51960,6 +52058,8 @@ export namespace Prisma {
     performed_by_user_id?: SortOrder
     linked_request_id?: SortOrder
     supervisor_user_id?: SortOrder
+    cost?: SortOrder
+    cost_saved?: SortOrder
   }
 
   export type Enumfrequency_type_enumNullableFilter<$PrismaModel = never> = {
@@ -59279,6 +59379,9 @@ export namespace Prisma {
     next_scheduled_date?: Date | string | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
     users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
     users_preventive_maintenance_logs_supervisor_user_idTousers?: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
@@ -59295,6 +59398,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -60183,6 +60289,9 @@ export namespace Prisma {
     supervisor_user_id?: IntNullableFilter<"preventive_maintenance_logs"> | number | null
     supervisor_approved_at?: DateTimeNullableFilter<"preventive_maintenance_logs"> | Date | string | null
     supervisor_notes?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    hardware_replaced?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
+    cost?: DecimalNullableFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: DecimalNullableFilter<"preventive_maintenance_logs"> | Decimal | DecimalJsLike | number | string | null
     status?: StringNullableFilter<"preventive_maintenance_logs"> | string | null
   }
 
@@ -61318,6 +61427,9 @@ export namespace Prisma {
     next_scheduled_date?: Date | string | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
     maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
     users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
@@ -61334,6 +61446,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -64859,6 +64974,9 @@ export namespace Prisma {
     next_scheduled_date?: Date | string | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
     maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
     users_preventive_maintenance_logs_supervisor_user_idTousers?: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersInput
@@ -64875,6 +64993,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -64894,6 +65015,9 @@ export namespace Prisma {
     next_scheduled_date?: Date | string | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
     maintenance_requests?: maintenance_requestsCreateNestedOneWithoutPreventive_maintenance_logsInput
     users_preventive_maintenance_logs_performed_by_user_idTousers: usersCreateNestedOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersInput
@@ -64910,6 +65034,9 @@ export namespace Prisma {
     linked_request_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -67270,6 +67397,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -67373,6 +67503,9 @@ export namespace Prisma {
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
     users_preventive_maintenance_logs_supervisor_user_idTousers?: usersUpdateOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
@@ -67389,6 +67522,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -67402,6 +67538,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -67667,6 +67806,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -67676,6 +67818,9 @@ export namespace Prisma {
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
     users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
@@ -67692,6 +67837,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -67705,6 +67853,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -68312,6 +68463,9 @@ export namespace Prisma {
     supervisor_user_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -68325,6 +68479,9 @@ export namespace Prisma {
     linked_request_id?: number | null
     supervisor_approved_at?: Date | string | null
     supervisor_notes?: string | null
+    hardware_replaced?: string | null
+    cost?: Decimal | DecimalJsLike | number | string | null
+    cost_saved?: Decimal | DecimalJsLike | number | string | null
     status?: string | null
   }
 
@@ -69021,6 +69178,9 @@ export namespace Prisma {
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
     users_preventive_maintenance_logs_supervisor_user_idTousers?: usersUpdateOneWithoutPreventive_maintenance_logs_preventive_maintenance_logs_supervisor_user_idTousersNestedInput
@@ -69037,6 +69197,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -69050,6 +69213,9 @@ export namespace Prisma {
     supervisor_user_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -69059,6 +69225,9 @@ export namespace Prisma {
     next_scheduled_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     maintenance_requests?: maintenance_requestsUpdateOneWithoutPreventive_maintenance_logsNestedInput
     users_preventive_maintenance_logs_performed_by_user_idTousers?: usersUpdateOneRequiredWithoutPreventive_maintenance_logs_preventive_maintenance_logs_performed_by_user_idTousersNestedInput
@@ -69075,6 +69244,9 @@ export namespace Prisma {
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -69088,6 +69260,9 @@ export namespace Prisma {
     linked_request_id?: NullableIntFieldUpdateOperationsInput | number | null
     supervisor_approved_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     supervisor_notes?: NullableStringFieldUpdateOperationsInput | string | null
+    hardware_replaced?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    cost_saved?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

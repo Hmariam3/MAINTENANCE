@@ -567,19 +567,19 @@ const RequestDetail = () => {
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
                     <div style={fieldStyle}>
-                      <label style={labelStyle}>Hardware Replaced</label>
+                      <label style={labelStyle}>Replaced Spare Part List</label>
                       <input value={resForm.hardware_type} onChange={e => setResForm(p => ({ ...p, hardware_type: e.target.value }))} style={inputStyle} placeholder="e.g. RAM, HDD" />
                     </div>
                     <div style={fieldStyle}>
-                      <label style={labelStyle}>Cost</label>
+                      <label style={labelStyle}>Spare Part Cost</label>
                       <input value={resForm.serial_number} onChange={e => setResForm(p => ({ ...p, serial_number: e.target.value }))} style={inputStyle} />
                     </div>
                     <div style={fieldStyle}>
-                      <label style={labelStyle}>...</label>
+                      <label style={labelStyle}>Labor Cost</label>
                       <input value={resForm.tag_number} onChange={e => setResForm(p => ({ ...p, tag_number: e.target.value }))} style={inputStyle} />
                     </div>
                     <div style={fieldStyle}>
-                      <label style={labelStyle}>Cost Saved ($)</label>
+                      <label style={labelStyle}>Cost Saved</label>
                       <input type="number" step="0.01" value={resForm.cost_saved} onChange={e => setResForm(p => ({ ...p, cost_saved: e.target.value }))} style={inputStyle} placeholder="0.00" />
                     </div>
                   </div>
