@@ -1,0 +1,98 @@
+# ==========================
+# DEVELOPMENT MACHINE
+# ==========================
+
+git add .
+git commit -m "Describe the change"
+git push
+
+
+# ==========================
+# PRODUCTION SERVER
+# ==========================
+
+cd /var/www/MAINTENANCE
+
+
+# ==========================
+# APPLICATION BACKUP
+# ==========================
+
+# Backup current production application before update
+
+sudo tar -czf \
+/home/hailemariamk/appbackup/maintenance_app_backup_$(date +%F_%H-%M-%S).tar.gz \
+/var/www/MAINTENANCE
+
+
+# Check backup created
+
+ls -lh /home/hailemariamk/appbackup/
+
+
+# ==========================
+# DATABASE BACKUP
+# ==========================
+
+sudo -u postgres pg_dump \
+-p 5434 \
+-F c \
+-d maintenance_db \
+-f /home/hailemariamk/dbbackup/maintenance_backup_$(date +%F_%H-%M-%S).backup
+
+
+# Check database backup
+
+ls -lh /home/hailemariamk/dbbackup/
+
+
+# ==========================
+# GET LATEST CODE
+# ==========================
+
+git pull
+
+git status
+
+
+# ==========================
+# BACKEND UPDATE
+# ==========================
+
+cd backend
+
+npm install   # if dependencies changed
+
+npx prisma generate   # if Prisma changed
+
+npx prisma db push    # if database structure added
+
+pm2 restart maintenance-backend
+
+
+# Check backend
+
+pm2 status
+
+pm2 logs maintenance-backend --lines 50
+
+
+
+# ==========================
+# FRONTEND UPDATE
+# ==========================
+
+cd ../frontend
+
+npm install   # if dependencies changed
+
+npm run build
+
+sudo cp -r dist/* /var/www/html/maintenance/
+
+
+# Reload nginx
+
+sudo systemctl reload nginx
+
+
